@@ -1,4 +1,5 @@
 package benutzerschnittstelle;
 
-public class Konsole {
+public final class Konsole
+{
 }
