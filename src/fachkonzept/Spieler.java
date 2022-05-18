@@ -32,12 +32,12 @@ public class Spieler
 		
 	}
 	
-	public void laufeSüdOst()
+	public void laufeSuedOst()
 	{
 		
 	}
 	
-	public void laufeSüdWest()
+	public void laufeSuedWest()
 	{
 		
 	}
