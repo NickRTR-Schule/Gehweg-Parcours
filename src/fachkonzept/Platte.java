@@ -11,7 +11,6 @@ public class Platte
 		
 	public boolean istSpielerAufPlatte()
 	{
-		
 	}
 	
 	public String liesPositionAufPlatte()
@@ -19,14 +18,9 @@ public class Platte
 		
 	}
 	
-	public void setzeHundehaufen()
-	{
-		
-	}
-	
 	public boolean istHundehaufenAufPlatte()
 	{
-		
+		return hatHundehaufen;
 	}
 	
 	
