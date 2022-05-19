@@ -39,6 +39,7 @@ public final class Platte
 	 */
 	public int leseAngrenzendeHundehaufen()
 	{
+		return 1;
 	}
 
 	/**

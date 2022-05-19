@@ -1,5 +1,6 @@
 package benutzerschnittstelle;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -33,7 +34,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Das Hauptpanel in dem Fenster
 	 */
-	private JPanel contentPane;
+	private JPanel panel = new JPanel(new GridLayout(14, 6));
 
 	/**
 	 * Launch the application.
@@ -76,12 +77,14 @@ public final class Spielfeld extends JFrame
 	 */
 	private void initialisieren()
 	{
+		final JPanel contentPane = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 320, 560);
-		contentPane = new JPanel();
+		setBounds(100, 100, 350, 600);
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setPreferredSize(new Dimension(320, 560));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 8));
+		setMinimumSize(new Dimension(getBounds().width, getBounds().height));
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -117,13 +120,12 @@ public final class Spielfeld extends JFrame
 						"../../assets/zugedeckt.png");
 				// Knopf erstellen
 				final JButton button = new JButton();
+				button.setPreferredSize(new Dimension(20, 20));
 				// Platte an der aktuellen Position bekommen
 				final Platte platte = spiel.lesePlatte(zählerSpalte,
 						zählerZeile);
 				// Icon festlegen
 				button.setIcon(icon);
-				// Größe des Knopfs festlegen
-				button.setSize(new Dimension(150, 150));
 				// MouseListener hinzufügen
 				button.addMouseListener(new MouseListener()
 				{
@@ -190,7 +192,7 @@ public final class Spielfeld extends JFrame
 
 					}
 				});
-				contentPane.add(button, zählerSpalte, zählerZeile);
+				panel.add(button);
 			}
 		}
 	}
