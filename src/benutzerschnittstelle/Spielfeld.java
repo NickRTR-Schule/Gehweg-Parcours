@@ -1,8 +1,8 @@
 package benutzerschnittstelle;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Locale;
@@ -17,7 +17,7 @@ import fachkonzept.Platte;
 import fachkonzept.Spiel;
 
 /**
- * GUI Klasse des Programms Gehweg-Pacrcours
+ * GUI Klasse des Programms Gehweg-Parcours
  * 
  * @author julianschumacher
  *
@@ -25,10 +25,15 @@ import fachkonzept.Spiel;
 public final class Spielfeld extends JFrame
 {
 
+	/**
+	 * Die SerialVersionUID Dies steht für "unique identification"
+	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Das Hauptpanel in dem Fenster
+	 */
 	private JPanel contentPane;
-	// Constraints für den Inhalt erstellen
-	private final GridBagConstraints constraints = new GridBagConstraints();
 
 	/**
 	 * Launch the application.
@@ -42,37 +47,41 @@ public final class Spielfeld extends JFrame
 			{
 				try
 				{
-					Spielfeld frame = new Spielfeld();
-					frame.setVisible(true);
+					Spielfeld fenster = new Spielfeld();
+					fenster.setVisible(true);
 				}
-				catch (Exception e)
+				catch (Exception fehler)
 				{
-					e.printStackTrace();
+					fehler.printStackTrace();
 				}
 			}
 		});
 	}
 
 	/**
-	 * Create the frame.
+	 * Panel erstellen
 	 */
 	public Spielfeld()
+	{
+		// Initialisieren
+		initialisieren();
+
+		// Objekte zu dem Fenster hinzuzufügen
+		objekteHinzufügen();
+
+	}
+
+	/**
+	 * Initialisiert alle Werte ebenso wie z.B. den Titel des Fensters
+	 */
+	private void initialisieren()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 320, 560);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(new GridLayout(0, 8));
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -85,11 +94,11 @@ public final class Spielfeld extends JFrame
 
 		// Die Sprache auf Deutsch setzen
 		setLocale(new Locale("de"));
-
-		// Objekte zu dem Fenster hinzuzufügen
-		objekteHinzufügen();
 	}
 
+	/**
+	 * Fügt alle Objekte, wie z.B. Platten (als Buttons) zum Fenster hnzu.
+	 */
 	private void objekteHinzufügen()
 	{
 		// erstelle Spiel
@@ -101,7 +110,8 @@ public final class Spielfeld extends JFrame
 					.leseZeilen(); zählerZeile++)
 			{
 				// Icon für die zugedeckten Platten
-				final ImageIcon icon = new ImageIcon("../assets/zugedeckt.png");
+				final ImageIcon icon = new ImageIcon(
+						"../../assets/zugedeckt.png");
 				// Knopf erstellen
 				final JButton button = new JButton();
 				// Platte an der aktuellen Position bekommen
@@ -109,6 +119,8 @@ public final class Spielfeld extends JFrame
 						zählerZeile);
 				// Icon festlegen
 				button.setIcon(icon);
+				// Größe des Knopfs festlegen
+				button.setSize(new Dimension(150, 150));
 				// MouseListener hinzufügen
 				button.addMouseListener(new MouseListener()
 				{
@@ -141,8 +153,8 @@ public final class Spielfeld extends JFrame
 						{
 							if (platte.istHundehaufenAufPlatte())
 							{
-								button.setIcon(
-										new ImageIcon("../assets/Kacke.png"));
+								button.setIcon(new ImageIcon(
+										"../../assets/Kacke.png"));
 								// Spiel ist verloren
 							}
 							else
@@ -160,8 +172,8 @@ public final class Spielfeld extends JFrame
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								// Vermutung durch Fahne anzeigen
-								button.setIcon(
-										new ImageIcon("../assets/Fahne.png"));
+								button.setIcon(new ImageIcon(
+										"../../assets/Fahne.png"));
 							}
 							else
 							{
@@ -171,11 +183,8 @@ public final class Spielfeld extends JFrame
 
 					}
 				});
-				constraints.gridx = zählerSpalte;
-				constraints.gridy = zählerZeile;
-				contentPane.add(button, constraints);
+				contentPane.add(button, zählerSpalte, zählerZeile);
 			}
 		}
 	}
-
 }

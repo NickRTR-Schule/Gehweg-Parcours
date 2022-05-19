@@ -1,5 +1,11 @@
 package fachkonzept;
 
+/**
+ * Dieses Objekt repräsentiert eine einzelne Platte im Spiel.
+ * 
+ * @author julianschumacher
+ *
+ */
 public final class Platte
 {
 	private boolean hatHundehaufen;
