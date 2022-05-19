@@ -9,4 +9,15 @@ package benutzerschnittstelle;
  */
 public final class Konsole
 {
+	/**
+	 * Loggt etwas in die Konsole. Wird benutzt für Debugging, Testen und eben
+	 * Logging.
+	 * 
+	 * @param nachricht
+	 *            - Eine Zeichenfolge die ausgegeben werden soll
+	 */
+	static void log(String nachricht)
+	{
+		System.out.println(nachricht);
+	}
 }

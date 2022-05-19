@@ -59,7 +59,7 @@ public final class Spielfeld extends JFrame
 	}
 
 	/**
-	 * Panel erstellen
+	 * Panel erstellen.
 	 */
 	public Spielfeld()
 	{
@@ -103,9 +103,12 @@ public final class Spielfeld extends JFrame
 	{
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
+
+		// For-Schleife für die Spalten
 		for (int zählerSpalte = 0; zählerSpalte < spiel
 				.leseSpalten(); zählerSpalte++)
 		{
+			// For-Schleife für die Zeilen in einer Spalte
 			for (int zählerZeile = 0; zählerZeile < spiel
 					.leseZeilen(); zählerZeile++)
 			{
@@ -124,6 +127,9 @@ public final class Spielfeld extends JFrame
 				// MouseListener hinzufügen
 				button.addMouseListener(new MouseListener()
 				{
+					// Diese Methoden sind irrelevant für dieses Programm.
+					// Somit sind sie nicht beschrieben und können ignoriert
+					// werden
 
 					@Override
 					public void mouseReleased(MouseEvent e)
@@ -177,7 +183,8 @@ public final class Spielfeld extends JFrame
 							}
 							else
 							{
-
+								// Weder Links- noch Rechtsklick. Insofern ist
+								// es für dieses Programm irrelevant
 							}
 						}
 
