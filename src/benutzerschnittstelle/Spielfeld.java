@@ -27,7 +27,7 @@ public final class Spielfeld extends JFrame
 {
 
 	/**
-	 * Die SerialVersionUID Dies steht für "unique identification"
+	 * Die SerialVersionUID Dies steht fuer "unique identification"
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -67,8 +67,8 @@ public final class Spielfeld extends JFrame
 		// Initialisieren
 		initialisieren();
 
-		// Objekte zu dem Fenster hinzuzufügen
-		objekteHinzufügen();
+		// Objekte zu dem Fenster hinzuzufuegen
+		objekteHinzufuegen();
 
 	}
 
@@ -89,7 +89,7 @@ public final class Spielfeld extends JFrame
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
 
-		// Möglichkeit das Fenster zu skalieren aktivieren
+		// Moeglichkeit das Fenster zu skalieren aktivieren
 		setResizable(true);
 
 		// Das Fenster selbst aktivieren
@@ -100,37 +100,37 @@ public final class Spielfeld extends JFrame
 	}
 
 	/**
-	 * Fügt alle Objekte, wie z.B. Platten (als Buttons) zum Fenster hnzu.
+	 * Fuegt alle Objekte, wie z.B. Platten (als Buttons) zum Fenster hnzu.
 	 */
-	private void objekteHinzufügen()
+	private void objekteHinzufuegen()
 	{
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
 
-		// For-Schleife für die Spalten
-		for (int zählerSpalte = 0; zählerSpalte < spiel
-				.leseSpalten(); zählerSpalte++)
+		// For-Schleife fuer die Spalten
+		for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
+				.leseSpalten(); zaehlerSpalte++)
 		{
-			// For-Schleife für die Zeilen in einer Spalte
-			for (int zählerZeile = 0; zählerZeile < spiel
-					.leseZeilen(); zählerZeile++)
+			// For-Schleife fuer die Zeilen in einer Spalte
+			for (int zaehlerZeile = 0; zaehlerZeile < spiel
+					.leseZeilen(); zaehlerZeile++)
 			{
-				// Icon für die zugedeckten Platten
+				// Icon fuer die zugedeckten Platten
 				final ImageIcon icon = new ImageIcon(
 						"../../assets/zugedeckt.png");
 				// Knopf erstellen
 				final JButton button = new JButton();
 				button.setPreferredSize(new Dimension(20, 20));
 				// Platte an der aktuellen Position bekommen
-				final Platte platte = spiel.lesePlatte(zählerSpalte,
-						zählerZeile);
+				final Platte platte = spiel.lesePlatte(zaehlerSpalte,
+						zaehlerZeile);
 				// Icon festlegen
 				button.setIcon(icon);
-				// MouseListener hinzufügen
+				// MouseListener hinzufuegen
 				button.addMouseListener(new MouseListener()
 				{
-					// Diese Methoden sind irrelevant für dieses Programm.
-					// Somit sind sie nicht beschrieben und können ignoriert
+					// Diese Methoden sind irrelevant fuer dieses Programm.
+					// Somit sind sie nicht beschrieben und koennen ignoriert
 					// werden
 
 					@Override
@@ -186,7 +186,7 @@ public final class Spielfeld extends JFrame
 							else
 							{
 								// Weder Links- noch Rechtsklick. Insofern ist
-								// es für dieses Programm irrelevant
+								// es fuer dieses Programm irrelevant
 							}
 						}
 

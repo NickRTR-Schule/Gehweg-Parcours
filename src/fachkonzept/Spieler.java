@@ -1,7 +1,7 @@
 package fachkonzept;
 
 /**
- * Dieses Objekt repräsentiert den Spieler. Man kann den Spieler bewegen und
+ * Dieses Objekt repraesentiert den Spieler. Man kann den Spieler bewegen und
  * eine Vermutung setzten
  * 
  * @author julianschumacher
@@ -42,7 +42,7 @@ public final class Spieler
 	}
 
 	/**
-	 * Bewegt den Spieler nach unten. Dies ist gleichzusetzten mit rückwärts
+	 * Bewegt den Spieler nach unten. Dies ist gleichzusetzten mit rueckwaerts
 	 * laufen.
 	 */
 	public void laufeUnten()
@@ -50,22 +50,23 @@ public final class Spieler
 	}
 
 	/**
-	 * Bewegt den Spieler nach Nord-ost Man könnte auch sagen, dass er nach oben
-	 * rechts bewegt wird.
+	 * Bewegt den Spieler nach Nord-ost Man koennte auch sagen, dass er nach
+	 * oben rechts bewegt wird.
 	 */
 	public void laufeNordOst()
 	{
 	}
 
 	/**
-	 * Bewegt den Spieler nach Süd-ost Man könnte auch sagen, nach unten rechts.
+	 * Bewegt den Spieler nach Sued-ost Man koennte auch sagen, nach unten
+	 * rechts.
 	 */
 	public void laufeSuedOst()
 	{
 	}
 
 	/**
-	 * Bewegt den Spieler nach Süd-West. Man könnte auch sagen, nach unten
+	 * Bewegt den Spieler nach Sued-West. Man koennte auch sagen, nach unten
 	 * links.
 	 */
 	public void laufeSuedWest()
@@ -73,7 +74,8 @@ public final class Spieler
 	}
 
 	/**
-	 * Bewegt den Spieler nach Nord-West. Man könnte auch sagen nach Oben links.
+	 * Bewegt den Spieler nach Nord-West. Man koennte auch sagen nach Oben
+	 * links.
 	 */
 	public void laufeNordWest()
 	{

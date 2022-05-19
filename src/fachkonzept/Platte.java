@@ -1,7 +1,7 @@
 package fachkonzept;
 
 /**
- * Dieses Objekt repräsentiert eine einzelne Platte im Spiel.
+ * Dieses Objekt repraesentiert eine einzelne Platte im Spiel.
  * 
  * @author julianschumacher
  *
@@ -10,7 +10,7 @@ public final class Platte
 {
 	private boolean hatHundehaufen;
 
-	// Nachfolgende Variablen repräsentieren die Position der Platte
+	// Nachfolgende Variablen repraesentieren die Position der Platte
 	// auf dem Spielfeld
 	private final int spalte;
 	private final int zeile;
@@ -23,7 +23,7 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt zurück, ob der Spieler sich auf dieser Platte befindet oder nicht.
+	 * Gibt zurueck, ob der Spieler sich auf dieser Platte befindet oder nicht.
 	 * 
 	 * @return wahr oder falsch
 	 */
@@ -33,7 +33,7 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurück
+	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurueck
 	 * 
 	 * @return Ganzzahl
 	 */
@@ -43,7 +43,7 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt zurück, ob sich ein Hundehaufen auf dieser Platte befindet oder
+	 * Gibt zurueck, ob sich ein Hundehaufen auf dieser Platte befindet oder
 	 * nicht. Diese Methode kann benutzt werden, um herauszufinden, ob der
 	 * Spieler verloren hat oder nicht.
 	 * 
@@ -55,7 +55,7 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt nur die Spalte der Position der Platte zurück
+	 * Gibt nur die Spalte der Position der Platte zurueck
 	 * 
 	 * @return Ganzzahl
 	 */
@@ -65,7 +65,7 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt nur die Zeile der Position zurück
+	 * Gibt nur die Zeile der Position zurueck
 	 * 
 	 * @return Ganzzahl
 	 */

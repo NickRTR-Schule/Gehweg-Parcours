@@ -1,8 +1,8 @@
 package fachkonzept;
 
 /**
- * Dieses Objekt repräsentiert das Spiel. Hier findet die Logik des Hundehaufen
- * verteilens statt. Außerdem hält dieses Objekt das Spielfeld und deren Maße.
+ * Dieses Objekt repraesentiert das Spiel. Hier findet die Logik des Hundehaufen
+ * verteilens statt. Außerdem haelt dieses Objekt das Spielfeld und deren Maße.
  * 
  * @author julianschumacher
  *
@@ -10,8 +10,8 @@ package fachkonzept;
 public final class Spiel
 {
 	/**
-	 * Dieses 2D-Array repräsentiert das Spielfeld. Das erste Array steht für
-	 * die Spalten. Das "zweite", also das Array im Array, steht für di Zeilen
+	 * Dieses 2D-Array repraesentiert das Spielfeld. Das erste Array steht fuer
+	 * die Spalten. Das "zweite", also das Array im Array, steht fuer di Zeilen
 	 * pro Spalte
 	 */
 	private final String[][] spielfeld;
@@ -23,7 +23,7 @@ public final class Spiel
 	}
 
 	/**
-	 * Gibt die Platte an den angegebenen Koordinaten zurück
+	 * Gibt die Platte an den angegebenen Koordinaten zurueck
 	 * 
 	 * @param spalte
 	 *            - Die Spalte auf dem Spielfeld
@@ -38,7 +38,7 @@ public final class Spiel
 	}
 
 	/**
-	 * Diese Methode verteilt zufällig die Hundehaufen auf den Platten
+	 * Diese Methode verteilt zufaellig die Hundehaufen auf den Platten
 	 */
 	private void verteileHundehaufen()
 	{
@@ -46,7 +46,7 @@ public final class Spiel
 	}
 
 	/**
-	 * Gibt die Anzahl der Spalten zurück
+	 * Gibt die Anzahl der Spalten zurueck
 	 * 
 	 * @return Ganzzahl
 	 */
@@ -56,7 +56,7 @@ public final class Spiel
 	}
 
 	/**
-	 * Gibt die Anzahl der Zeilen zurück
+	 * Gibt die Anzahl der Zeilen zurueck
 	 * 
 	 * @return Ganzzahl
 	 */
