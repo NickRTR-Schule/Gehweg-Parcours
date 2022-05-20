@@ -120,4 +120,9 @@ public final class Spiel
 	{
 		return spielfeld[0].length;
 	}
+
+	public String verloren()
+	{
+		return "Sie sind in Kacke getreten!";
+	}
 }

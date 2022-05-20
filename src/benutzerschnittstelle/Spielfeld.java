@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -169,7 +170,7 @@ public final class Spielfeld extends JFrame
 							{
 								button.setIcon(
 										new ImageIcon("./assets/Kacke.png"));
-								// Spiel ist verloren
+								JOptionPane.showMessageDialog(null, spiel.verloren());
 							}
 							else
 							{
