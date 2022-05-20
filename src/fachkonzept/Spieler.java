@@ -5,6 +5,12 @@ public class Spieler
 	private int positionSpalte = 0;
 	private int positionZeile = 0;
 
+	public void setzePosition(int spalte, int zeile)
+	{
+		positionSpalte = spalte;
+		positionZeile = zeile;
+	}
+
 	public int liesSpielerPositionSpalte()
 	{
 		return positionSpalte;
@@ -20,44 +26,44 @@ public class Spieler
 		
 	}
 	
-	public void laufeRechts()
-	{
+	// TODO: unnötig?
+	// public void laufeRechts()
+	// {
 		
-	}
+	// }
 	
-	public void laufeLinks()
-	{
+	// public void laufeLinks()
+	// {
 		
-	}
+	// }
 	
-	public void laufeOben()
-	{
+	// public void laufeOben()
+	// {
 		
-	}
+	// }
 	
-	public void laufeUnten()
-	{
+	// public void laufeUnten()
+	// {
 		
-	}
+	// }
 	
-	public void laufeNordOst()
-	{
+	// public void laufeNordOst()
+	// {
 		
-	}
+	// }
 	
-	public void laufeSuedOst()
-	{
+	// public void laufeSuedOst()
+	// {
 		
-	}
+	// }
 	
-	public void laufeSuedWest()
-	{
+	// public void laufeSuedWest()
+	// {
 		
-	}
+	// }
 	
-	public void laufeNordWest()
-	{
+	// public void laufeNordWest()
+	// {
 		
-	}
-
+	// }
 }
