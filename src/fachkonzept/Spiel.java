@@ -17,7 +17,7 @@ public final class Spiel
 	 * pro Spalte
 	 */
 	private final Platte[][] spielfeld;
-	
+
 	private int anzahlHundehaufen = 20;
 
 	public Spiel()
@@ -56,7 +56,7 @@ public final class Spiel
 	{
 		return spielfeld[spalte][zeile];
 	}
-	
+
 	/**
 	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurueck
 	 * 
@@ -64,7 +64,8 @@ public final class Spiel
 	 */
 	public int leseAngrenzendeHundehaufen(int plattenSpalte, int plattenZeile)
 	{
-		// TODO: Wenn auf eine Platte am Rand des Spielfelds gedrückt wird, gibt es eine Exception, da -1 nicht im Spielfeld Array ist.
+		// TODO: Wenn auf eine Platte am Rand des Spielfelds gedrückt wird, gibt
+		// es eine Exception, da -1 nicht im Spielfeld Array ist.
 
 		int angrenzendeHundehaufenZaehler = 0;
 
@@ -87,18 +88,17 @@ public final class Spiel
 	private void verteileHundehaufen()
 	{
 		Random random = new Random();
-		
 		do
 		{
-			int zeile = random.nextInt(leseZeilen());
-			int spalte = random.nextInt(leseSpalten());
-			Platte platte = spielfeld[spalte][zeile];
-			if(!platte.istHundehaufenAufPlatte())
+			final int zeile = random.nextInt(leseZeilen());
+			final int spalte = random.nextInt(leseSpalten());
+			final Platte platte = spielfeld[spalte][zeile];
+			if (!platte.istHundehaufenAufPlatte())
 			{
 				platte.setzeHundehaufen();
 				anzahlHundehaufen--;
 			}
-		} while(anzahlHundehaufen != 0);
+		} while (anzahlHundehaufen != 0);
 	}
 
 	/**
