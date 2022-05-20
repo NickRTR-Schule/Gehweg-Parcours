@@ -21,6 +21,11 @@ public final class Platte
 		zeile = pZeile;
 		hatHundehaufen = false;
 	}
+	
+	public void setzeHundehaufen() 
+	{
+		hatHundehaufen = true;
+	}
 
 	/**
 	 * Gibt zurueck, ob der Spieler sich auf dieser Platte befindet oder nicht.
@@ -30,16 +35,6 @@ public final class Platte
 	public boolean istSpielerAufPlatte()
 	{
 
-	}
-
-	/**
-	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurueck
-	 * 
-	 * @return Ganzzahl
-	 */
-	public int leseAngrenzendeHundehaufen()
-	{
-		return 1;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package fachkonzept;
 
 /**
  * Dieses Objekt repraesentiert das Spiel. Hier findet die Logik des Hundehaufen
- * verteilens statt. Au√üerdem haelt dieses Objekt das Spielfeld und deren Ma√üe.
+ * verteilens statt. Auﬂerdem haelt dieses Objekt das Spielfeld und deren Maﬂe.
  * 
  * @author julianschumacher
  *
@@ -14,12 +14,12 @@ public final class Spiel
 	 * die Spalten. Das "zweite", also das Array im Array, steht fuer di Zeilen
 	 * pro Spalte
 	 */
-	private final String[][] spielfeld;
+	private final Platte[][] spielfeld;
 
 	public Spiel()
 	{
 		verteileHundehaufen();
-		spielfeld = new String[6][14];
+		spielfeld = new Platte[6][14];
 	}
 
 	/**
@@ -35,6 +35,27 @@ public final class Spiel
 	public Platte lesePlatte(int spalte, int zeile)
 	{
 		return new Platte(spalte, zeile);
+	}
+	
+	/**
+	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurueck
+	 * 
+	 * @return Ganzzahl
+	 */
+	public int leseAngrenzendeHundehaufen(int plattenSpalte, int plattenZeile)
+	{
+		int angrenzendeHundehaufenZ‰hler = 0;
+		for (int s = plattenSpalte--; s < plattenSpalte++; s++)
+		{
+			for (int z = plattenZeile--; z < plattenZeile--; z++)
+			{
+				if (spielfeld[s][z].istHundehaufenAufPlatte())
+				{
+					angrenzendeHundehaufenZ‰hler++;
+				}
+			}
+		}
+		return angrenzendeHundehaufenZ‰hler;
 	}
 
 	/**

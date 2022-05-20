@@ -168,8 +168,8 @@ public final class Spielfeld extends JFrame
 							else
 							{
 								// Angrenzende Hundehaufen anzeigen
-								final int angrenzendeHundehaufen = platte
-										.leseAngrenzendeHundehaufen();
+								final int angrenzendeHundehaufen = spiel
+										.leseAngrenzendeHundehaufen(platte.leseSpalte(), platte.leseZeile());
 								button.setText(Integer
 										.toString(angrenzendeHundehaufen));
 							}
