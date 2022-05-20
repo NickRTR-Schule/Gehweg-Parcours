@@ -61,9 +61,9 @@ public final class Spiel
 	public int leseAngrenzendeHundehaufen(int plattenSpalte, int plattenZeile)
 	{
 		int angrenzendeHundehaufenZaehler = 0;
-		for (int s = plattenSpalte--; s < plattenSpalte++; s++)
+		for (int s = plattenSpalte - 1; s < plattenSpalte + 1; s++)
 		{
-			for (int z = plattenZeile--; z < plattenZeile--; z++)
+			for (int z = plattenZeile - 1; z < plattenZeile + 1; z++)
 			{
 				if (spielfeld[s][z].istHundehaufenAufPlatte())
 				{
