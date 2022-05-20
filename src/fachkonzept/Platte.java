@@ -34,7 +34,7 @@ public final class Platte
 	 */
 	public boolean istSpielerAufPlatte()
 	{
-
+		return false;
 	}
 
 	/**

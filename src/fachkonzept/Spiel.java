@@ -18,8 +18,23 @@ public final class Spiel
 
 	public Spiel()
 	{
-		verteileHundehaufen();
 		spielfeld = new Platte[6][14];
+		verteileHundehaufen();
+	}
+
+	/**
+	 * Initialisiert das Spiel und erstellt alle Platten
+	 */
+	private void initialisieren()
+	{
+		for (int zaehlerSpalte = 0; zaehlerSpalte < leseSpalten(); zaehlerSpalte++)
+		{
+			for (int zaehlerZeile = 0; zaehlerZeile < leseZeilen(); zaehlerZeile++)
+			{
+				spielfeld[zaehlerSpalte][zaehlerZeile] = new Platte(
+						zaehlerSpalte, zaehlerZeile);
+			}
+		}
 	}
 
 	/**
