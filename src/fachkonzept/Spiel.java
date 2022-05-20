@@ -1,5 +1,7 @@
 package fachkonzept;
 
+import java.util.Random;
+
 /**
  * Dieses Objekt repraesentiert das Spiel. Hier findet die Logik des Hundehaufen
  * verteilens statt. Au�erdem haelt dieses Objekt das Spielfeld und deren Ma�e.
@@ -15,6 +17,8 @@ public final class Spiel
 	 * pro Spalte
 	 */
 	private final Platte[][] spielfeld;
+	
+	private int anzahlHundehaufen = 20;
 
 	public Spiel()
 	{
@@ -82,7 +86,23 @@ public final class Spiel
 	 */
 	private void verteileHundehaufen()
 	{
-
+		Random random = new Random();
+		
+			do
+			{
+				int zeile = random.nextInt(leseZeilen());
+				int spalte = random.nextInt(leseSpalten());
+				Platte platte = spielfeld[spalte][zeile];
+				if(platte.istHundehaufenAufPlatte())
+				{
+				}
+				else
+				{
+					platte.setzeHundehaufen();
+					anzahlHundehaufen--;
+				}
+			}while(anzahlHundehaufen != 0);
+		
 	}
 
 	/**
