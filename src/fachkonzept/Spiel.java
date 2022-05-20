@@ -19,6 +19,7 @@ public final class Spiel
 	public Spiel()
 	{
 		spielfeld = new Platte[6][14];
+		initialisieren();
 		verteileHundehaufen();
 	}
 
