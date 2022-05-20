@@ -49,7 +49,7 @@ public final class Spiel
 	 */
 	public Platte lesePlatte(int spalte, int zeile)
 	{
-		return new Platte(spalte, zeile);
+		return spielfeld[spalte][zeile];
 	}
 
 	/**
