@@ -64,7 +64,10 @@ public final class Spiel
 	 */
 	public int leseAngrenzendeHundehaufen(int plattenSpalte, int plattenZeile)
 	{
+		// TODO: Wenn auf eine Platte am Rand des Spielfelds gedrückt wird, gibt es eine Exception, da -1 nicht im Spielfeld Array ist.
+
 		int angrenzendeHundehaufenZaehler = 0;
+
 		for (int s = plattenSpalte - 1; s < plattenSpalte + 1; s++)
 		{
 			for (int z = plattenZeile - 1; z < plattenZeile + 1; z++)

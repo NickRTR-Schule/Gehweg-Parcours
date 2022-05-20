@@ -2,6 +2,19 @@ package fachkonzept;
 
 public class Spieler
 {
+	private int positionSpalte = 0;
+	private int positionZeile = 0;
+
+	public int liesSpielerPositionSpalte()
+	{
+		return positionSpalte;
+	}
+
+	public int liesSpielerPositionZeile()
+	{
+		return positionZeile;
+	}
+
 	public void vermutungSetzen()
 	{
 		
