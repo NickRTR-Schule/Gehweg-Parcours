@@ -14,12 +14,27 @@ public final class Spiel
 	 * die Spalten. Das "zweite", also das Array im Array, steht fuer di Zeilen
 	 * pro Spalte
 	 */
-	private final String[][] spielfeld;
+	private final Platte[][] spielfeld;
 
 	public Spiel()
 	{
+		spielfeld = new Platte[6][14];
 		verteileHundehaufen();
-		spielfeld = new String[6][14];
+	}
+
+	/**
+	 * Initialisiert das Spiel und erstellt alle Platten
+	 */
+	private void initialisieren()
+	{
+		for (int zaehlerSpalte = 0; zaehlerSpalte < leseSpalten(); zaehlerSpalte++)
+		{
+			for (int zaehlerZeile = 0; zaehlerZeile < leseZeilen(); zaehlerZeile++)
+			{
+				spielfeld[zaehlerSpalte][zaehlerZeile] = new Platte(
+						zaehlerSpalte, zaehlerZeile);
+			}
+		}
 	}
 
 	/**

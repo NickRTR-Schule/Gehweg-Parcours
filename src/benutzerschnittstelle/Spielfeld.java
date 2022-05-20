@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Locale;
@@ -116,8 +117,12 @@ public final class Spielfeld extends JFrame
 					.leseZeilen(); zaehlerZeile++)
 			{
 				// Icon fuer die zugedeckten Platten
-				final ImageIcon icon = new ImageIcon(
-						"../../assets/zugedeckt.png");
+				final ImageIcon icon = new ImageIcon("./assets/zugedeckt.png");
+				final Image img = icon.getImage();
+				final Image newImg = img.getScaledInstance(20, 20,
+						java.awt.Image.SCALE_SMOOTH);
+				final ImageIcon newIcon = new ImageIcon(newImg);
+
 				// Knopf erstellen
 				final JButton button = new JButton();
 				button.setPreferredSize(new Dimension(20, 20));
@@ -125,7 +130,7 @@ public final class Spielfeld extends JFrame
 				final Platte platte = spiel.lesePlatte(zaehlerSpalte,
 						zaehlerZeile);
 				// Icon festlegen
-				button.setIcon(icon);
+				// button.setIcon(icon);
 				// MouseListener hinzufuegen
 				button.addMouseListener(new MouseListener()
 				{
@@ -161,8 +166,8 @@ public final class Spielfeld extends JFrame
 						{
 							if (platte.istHundehaufenAufPlatte())
 							{
-								button.setIcon(new ImageIcon(
-										"../../assets/Kacke.png"));
+								button.setIcon(
+										new ImageIcon("./assets/Kacke.png"));
 								// Spiel ist verloren
 							}
 							else
@@ -180,8 +185,8 @@ public final class Spielfeld extends JFrame
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								// Vermutung durch Fahne anzeigen
-								button.setIcon(new ImageIcon(
-										"../../assets/Fahne.png"));
+								button.setIcon(
+										new ImageIcon("./assets/Fahne.png"));
 							}
 							else
 							{
