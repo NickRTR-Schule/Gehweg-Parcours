@@ -19,6 +19,7 @@ public final class Spiel
 	public Spiel()
 	{
 		spielfeld = new Platte[6][14];
+		initialisieren();
 		verteileHundehaufen();
 	}
 
@@ -49,7 +50,7 @@ public final class Spiel
 	 */
 	public Platte lesePlatte(int spalte, int zeile)
 	{
-		return new Platte(spalte, zeile);
+		return spielfeld[spalte][zeile];
 	}
 	
 	/**
