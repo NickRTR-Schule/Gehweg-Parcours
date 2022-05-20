@@ -17,4 +17,4 @@ Kriterien, die ein Increment erfüllen muss, um bereit zum Release zu sein:
 
 - Was habe ich seit dem letzten Daily Scrum erreicht?
 - Was plane ich, bis zum nächsten Daily Scrum zu erreichen?
-- Welche hindernisse gibt es für mich aktuell?
+- Welche Hindernisse gibt es für mich aktuell?
