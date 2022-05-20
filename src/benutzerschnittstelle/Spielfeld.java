@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import fachkonzept.Platte;
-import fachkonzept.Spieler;
 import fachkonzept.Spiel;
 
 /**
@@ -109,7 +108,6 @@ public final class Spielfeld extends JFrame
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
 		//erstelle Spieler
-		final Spieler spieler = new Spieler();
 
 		// For-Schleife fuer die Spalten
 		for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
@@ -167,7 +165,6 @@ public final class Spielfeld extends JFrame
 						// Linksklick
 						if (mausKlick.getButton() == MouseEvent.BUTTON1)
 						{
-							spieler.setzePosition(platte.leseSpalte(), platte.leseZeile());	
 							if (platte.istHundehaufenAufPlatte())
 							{
 								button.setIcon(
