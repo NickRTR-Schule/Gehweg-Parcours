@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Locale;
@@ -79,13 +78,29 @@ public final class Spielfeld extends JFrame
 	 */
 	private void initialisieren()
 	{
+		// Panel erstellen
 		final JPanel contentPane = new JPanel();
+
+		// Standard Operation beim schließen festlegen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Ränder festlegen
 		setBounds(100, 100, 350, 600);
+
+		// Border Layout hinzufügen
 		contentPane.add(panel, BorderLayout.NORTH);
+
+		// Standard Größe festlegen
 		panel.setPreferredSize(new Dimension(320, 560));
+
+		// Border / Rand festlegen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		// Inhalts panel festlegen
 		setContentPane(contentPane);
+
+		// Minimale Größe setzen
+		// Das Fenster kann nicht kleiner als diese Größe sein.
 		setMinimumSize(new Dimension(getBounds().width, getBounds().height));
 
 		// Titel des Fensters festlegen
@@ -108,7 +123,7 @@ public final class Spielfeld extends JFrame
 	{
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
-		//erstelle Spieler
+		// erstelle Spieler
 
 		// For-Schleife fuer die Spalten
 		for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
@@ -120,10 +135,6 @@ public final class Spielfeld extends JFrame
 			{
 				// Icon fuer die zugedeckten Platten
 				final ImageIcon icon = new ImageIcon("./assets/zugedeckt.png");
-				final Image img = icon.getImage();
-				final Image newImg = img.getScaledInstance(20, 20,
-						java.awt.Image.SCALE_SMOOTH);
-				final ImageIcon newIcon = new ImageIcon(newImg);
 
 				// Knopf erstellen
 				final JButton button = new JButton();
@@ -132,7 +143,7 @@ public final class Spielfeld extends JFrame
 				final Platte platte = spiel.lesePlatte(zaehlerSpalte,
 						zaehlerZeile);
 				// Icon festlegen
-				// button.setIcon(icon);
+				button.setIcon(icon);
 				// MouseListener hinzufuegen
 				button.addMouseListener(new MouseListener()
 				{
@@ -170,13 +181,16 @@ public final class Spielfeld extends JFrame
 							{
 								button.setIcon(
 										new ImageIcon("./assets/Kacke.png"));
-								JOptionPane.showMessageDialog(null, spiel.verloren());
+								JOptionPane.showMessageDialog(null,
+										spiel.verloren());
 							}
 							else
 							{
 								// Angrenzende Hundehaufen anzeigen
 								final int angrenzendeHundehaufen = spiel
-										.leseAngrenzendeHundehaufen(platte.leseSpalte(), platte.leseZeile());
+										.leseAngrenzendeHundehaufen(
+												platte.leseSpalte(),
+												platte.leseZeile());
 								button.setText(Integer
 										.toString(angrenzendeHundehaufen));
 							}
