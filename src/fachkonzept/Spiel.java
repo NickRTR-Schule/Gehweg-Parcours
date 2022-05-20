@@ -88,21 +88,17 @@ public final class Spiel
 	{
 		Random random = new Random();
 		
-			do
+		do
+		{
+			int zeile = random.nextInt(leseZeilen());
+			int spalte = random.nextInt(leseSpalten());
+			Platte platte = spielfeld[spalte][zeile];
+			if(!platte.istHundehaufenAufPlatte())
 			{
-				int zeile = random.nextInt(leseZeilen());
-				int spalte = random.nextInt(leseSpalten());
-				Platte platte = spielfeld[spalte][zeile];
-				if(platte.istHundehaufenAufPlatte())
-				{
-				}
-				else
-				{
-					platte.setzeHundehaufen();
-					anzahlHundehaufen--;
-				}
-			}while(anzahlHundehaufen != 0);
-		
+				platte.setzeHundehaufen();
+				anzahlHundehaufen--;
+			}
+		} while(anzahlHundehaufen != 0);
 	}
 
 	/**
