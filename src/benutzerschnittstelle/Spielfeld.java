@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 
 import javax.swing.ImageIcon;
@@ -123,7 +126,52 @@ public final class Spielfeld extends JFrame
 	{
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
-		// erstelle Spieler
+
+		// Kacke Icon laden
+		final InputStream kackeAlsStream = Spielfeld.class.getClassLoader()
+				.getResourceAsStream("Kacke.png");
+		final ImageIcon kackeImg;
+
+		try
+		{
+			kackeImg = new ImageIcon(kackeAlsStream.readAllBytes());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		final InputStream fahneAlsStream = Spielfeld.class.getClassLoader()
+				.getResourceAsStream("Fahne.png");
+		final ImageIcon fahneIcon;
+		try
+		{
+			fahneIcon = new ImageIcon(fahneAlsStream.readAllBytes());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		// Icon fuer die zugedeckten Platten
+		final InputStream zugedecktAlsStream = Spielfeld.class.getClassLoader()
+				.getResourceAsStream("zugedeckt.png");
+		final ImageIcon zugedecktIcon;
+		try
+		{
+			zugedecktIcon = new ImageIcon(zugedecktAlsStream.readAllBytes());
+			Image image = zugedecktIcon.getImage();
+			Image scaledInstance = image.getScaledInstance(20, 20,
+					Image.SCALE_DEFAULT);
+			zugedecktIcon.setImage(scaledInstance);
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+			return;
+		}
 
 		// For-Schleife fuer die Spalten
 		for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
@@ -133,8 +181,6 @@ public final class Spielfeld extends JFrame
 			for (int zaehlerZeile = 0; zaehlerZeile < spiel
 					.leseZeilen(); zaehlerZeile++)
 			{
-				// Icon fuer die zugedeckten Platten
-				final ImageIcon icon = new ImageIcon("./assets/zugedeckt.png");
 
 				// Knopf erstellen
 				final JButton button = new JButton();
@@ -143,7 +189,7 @@ public final class Spielfeld extends JFrame
 				final Platte platte = spiel.lesePlatte(zaehlerSpalte,
 						zaehlerZeile);
 				// Icon festlegen
-				button.setIcon(icon);
+				button.setIcon(zugedecktIcon);
 				// MouseListener hinzufuegen
 				button.addMouseListener(new MouseListener()
 				{
@@ -179,8 +225,7 @@ public final class Spielfeld extends JFrame
 						{
 							if (platte.istHundehaufenAufPlatte())
 							{
-								button.setIcon(
-										new ImageIcon("./assets/Kacke.png"));
+								button.setIcon(kackeImg);
 								JOptionPane.showMessageDialog(null,
 										spiel.verloren());
 							}
@@ -201,8 +246,7 @@ public final class Spielfeld extends JFrame
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								// Vermutung durch Fahne anzeigen
-								button.setIcon(
-										new ImageIcon("./assets/Fahne.png"));
+								button.setIcon(fahneIcon);
 							}
 							else
 							{
