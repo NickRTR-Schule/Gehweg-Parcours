@@ -130,11 +130,15 @@ public final class Spielfeld extends JFrame
 		// Kacke Icon laden
 		final InputStream kackeAlsStream = Spielfeld.class.getClassLoader()
 				.getResourceAsStream("Kacke.png");
-		final ImageIcon kackeImg;
+		final ImageIcon kackeIcon;
 
 		try
 		{
-			kackeImg = new ImageIcon(kackeAlsStream.readAllBytes());
+			kackeIcon = new ImageIcon(kackeAlsStream.readAllBytes());
+			Image image = kackeIcon.getImage();
+			Image scaledInstance = image.getScaledInstance(20, 20,
+					Image.SCALE_DEFAULT);
+			kackeIcon.setImage(scaledInstance);
 		}
 		catch (IOException e)
 		{
@@ -148,6 +152,10 @@ public final class Spielfeld extends JFrame
 		try
 		{
 			fahneIcon = new ImageIcon(fahneAlsStream.readAllBytes());
+			Image image = fahneIcon.getImage();
+			Image scaledInstance = image.getScaledInstance(20, 20,
+					Image.SCALE_DEFAULT);
+			fahneIcon.setImage(scaledInstance);
 		}
 		catch (IOException e)
 		{
@@ -225,7 +233,7 @@ public final class Spielfeld extends JFrame
 						{
 							if (platte.istHundehaufenAufPlatte())
 							{
-								button.setIcon(kackeImg);
+								button.setIcon(kackeIcon);
 								JOptionPane.showMessageDialog(null,
 										spiel.verloren());
 							}
