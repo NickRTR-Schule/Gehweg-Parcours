@@ -240,6 +240,9 @@ public final class Spielfeld extends JFrame
 							else
 							{
 								// Angrenzende Hundehaufen anzeigen
+								/* Icon "entfernen", damit genug Platz 
+								für die Zahl vorhanden ist */
+								button.setIcon(null);
 								final int angrenzendeHundehaufen = spiel
 										.leseAngrenzendeHundehaufen(
 												platte.leseSpalte(),
