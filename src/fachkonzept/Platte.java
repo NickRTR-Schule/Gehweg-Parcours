@@ -15,14 +15,17 @@ public final class Platte
 	private final int spalte;
 	private final int zeile;
 
+	private boolean vermutungGesetzt;
+
 	public Platte(int pSpalte, int pZeile)
 	{
 		spalte = pSpalte;
 		zeile = pZeile;
 		hatHundehaufen = false;
+		vermutungGesetzt = false;
 	}
-	
-	public void setzeHundehaufen() 
+
+	public void setzeHundehaufen()
 	{
 		hatHundehaufen = true;
 	}
@@ -67,6 +70,21 @@ public final class Platte
 	public int leseZeile()
 	{
 		return zeile;
+	}
+
+	public void setzeVermutung()
+	{
+		vermutungGesetzt = true;
+	}
+
+	public void entferneVermutung()
+	{
+		vermutungGesetzt = false;
+	}
+
+	public boolean leseVermutung()
+	{
+		return vermutungGesetzt;
 	}
 
 }

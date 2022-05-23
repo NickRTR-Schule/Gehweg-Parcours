@@ -135,8 +135,8 @@ public final class Spielfeld extends JFrame
 		try
 		{
 			kackeIcon = new ImageIcon(kackeAlsStream.readAllBytes());
-			Image image = kackeIcon.getImage();
-			Image scaledInstance = image.getScaledInstance(20, 20,
+			final Image image = kackeIcon.getImage();
+			final Image scaledInstance = image.getScaledInstance(20, 20,
 					Image.SCALE_DEFAULT);
 			kackeIcon.setImage(scaledInstance);
 		}
@@ -152,8 +152,8 @@ public final class Spielfeld extends JFrame
 		try
 		{
 			fahneIcon = new ImageIcon(fahneAlsStream.readAllBytes());
-			Image image = fahneIcon.getImage();
-			Image scaledInstance = image.getScaledInstance(20, 20,
+			final Image image = fahneIcon.getImage();
+			final Image scaledInstance = image.getScaledInstance(20, 20,
 					Image.SCALE_DEFAULT);
 			fahneIcon.setImage(scaledInstance);
 		}
@@ -170,8 +170,8 @@ public final class Spielfeld extends JFrame
 		try
 		{
 			zugedecktIcon = new ImageIcon(zugedecktAlsStream.readAllBytes());
-			Image image = zugedecktIcon.getImage();
-			Image scaledInstance = image.getScaledInstance(20, 20,
+			final Image image = zugedecktIcon.getImage();
+			final Image scaledInstance = image.getScaledInstance(20, 20,
 					Image.SCALE_DEFAULT);
 			zugedecktIcon.setImage(scaledInstance);
 		}
@@ -228,12 +228,13 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void mouseClicked(MouseEvent mausKlick)
 					{
-						if (button.getIcon().equals(fahneIcon))
+						if (platte.leseVermutung())
 						{
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								button.setIcon(zugedecktIcon);
 								spiel.entferneVermutung();
+								platte.entferneVermutung();
 							}
 						}
 						else
@@ -274,6 +275,7 @@ public final class Spielfeld extends JFrame
 										// Vermutung durch Fahne anzeigen
 										button.setIcon(fahneIcon);
 										spiel.fuegeVermutungHinzu();
+										platte.setzeVermutung();
 									}
 
 								}
