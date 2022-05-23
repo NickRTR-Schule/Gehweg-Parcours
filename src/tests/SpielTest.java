@@ -11,6 +11,8 @@ import fachkonzept.Platte;
 import fachkonzept.Spiel;
 
 /**
+ * Testklasse fuer das Spiel.
+ * 
  * @author julianschumacher
  *
  */

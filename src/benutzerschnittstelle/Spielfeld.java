@@ -240,8 +240,10 @@ public final class Spielfeld extends JFrame
 							else
 							{
 								// Angrenzende Hundehaufen anzeigen
-								/* Icon "entfernen", damit genug Platz 
-								für die Zahl vorhanden ist */
+								/*
+								 * Icon "entfernen", damit genug Platz fï¿½r die
+								 * Zahl vorhanden ist
+								 */
 								button.setIcon(null);
 								final int angrenzendeHundehaufen = spiel
 										.leseAngrenzendeHundehaufen(
@@ -268,7 +270,10 @@ public final class Spielfeld extends JFrame
 
 					}
 				});
-				panel.add(button);
+				// TODO: Grid Layout Add Funktion untersuchen um herauszufinden
+				// wo das Problem liegt.
+				// Relevanz: Zahlen fuer die umliegenden Hundehaufen.
+				panel.add(button, zaehlerZeile, zaehlerSpalte);
 			}
 		}
 	}
