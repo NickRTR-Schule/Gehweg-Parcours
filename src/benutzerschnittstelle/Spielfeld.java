@@ -246,6 +246,8 @@ public final class Spielfeld extends JFrame
 									button.setIcon(kackeIcon);
 									JOptionPane.showMessageDialog(null,
 											spiel.verloren());
+									allePlattenAufdecken(spiel, kackeIcon);
+									System.exit(0);
 								}
 								else
 								{
@@ -289,6 +291,24 @@ public final class Spielfeld extends JFrame
 					}
 				});
 				panel.add(button);
+			}
+		}
+	}
+
+	public void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
+	{
+		// TODO: Wenn das Spiel verloren ist, sollen alle Platten aufgedeckt werden.
+		for (int zaehlerZeile = 0; zaehlerZeile < spiel
+				.leseZeilen(); zaehlerZeile++)
+		{
+			// For-Schleife fuer die Spalten in einer Zeile
+			for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
+					.leseSpalten(); zaehlerSpalte++)
+			{
+				// Knopf erstellen
+				final JButton button = new JButton();
+				button.setPreferredSize(new Dimension(20, 20));
+				button.setIcon(kackeIcon);
 			}
 		}
 	}
