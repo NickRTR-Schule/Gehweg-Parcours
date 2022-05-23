@@ -233,6 +233,7 @@ public final class Spielfeld extends JFrame
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								button.setIcon(zugedecktIcon);
+								spiel.entferneVermutung();
 							}
 						}
 						else
@@ -250,7 +251,7 @@ public final class Spielfeld extends JFrame
 								{
 									// Angrenzende Hundehaufen anzeigen
 									/*
-									 * Icon "entfernen", damit genug Platz f�r
+									 * Icon "entfernen", damit genug Platz fuer
 									 * die Zahl vorhanden ist
 									 */
 									button.setIcon(null);
@@ -267,8 +268,14 @@ public final class Spielfeld extends JFrame
 								// Rechtsklick
 								if (mausKlick.getButton() == MouseEvent.BUTTON3)
 								{
-									// Vermutung durch Fahne anzeigen
-									button.setIcon(fahneIcon);
+									if (spiel.leseVermutungen() < spiel
+											.leseMaximaleHundehaufen())
+									{
+										// Vermutung durch Fahne anzeigen
+										button.setIcon(fahneIcon);
+										spiel.fuegeVermutungHinzu();
+									}
+
 								}
 								else
 								{

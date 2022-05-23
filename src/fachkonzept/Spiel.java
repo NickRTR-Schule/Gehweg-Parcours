@@ -19,6 +19,7 @@ public final class Spiel
 	private final Platte[][] spielfeld;
 
 	private int anzahlHundehaufen = 20;
+	private int vermutungenGesetzt = 0;
 
 	public Spiel()
 	{
@@ -55,6 +56,26 @@ public final class Spiel
 	public Platte lesePlatte(int spalte, int zeile)
 	{
 		return spielfeld[spalte][zeile];
+	}
+
+	public int leseVermutungen()
+	{
+		return vermutungenGesetzt;
+	}
+
+	public void fuegeVermutungHinzu()
+	{
+		vermutungenGesetzt++;
+	}
+
+	public void entferneVermutung()
+	{
+		vermutungenGesetzt--;
+	}
+
+	public int leseMaximaleHundehaufen()
+	{
+		return anzahlHundehaufen;
 	}
 
 	/**
