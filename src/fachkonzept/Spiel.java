@@ -69,13 +69,18 @@ public final class Spiel
 
 		int angrenzendeHundehaufenZaehler = 0;
 
-		for (int s = plattenSpalte - 1; s < plattenSpalte + 1; s++)
+		for (int s = plattenSpalte - 1; s <= plattenSpalte + 1; s++)
 		{
-			for (int z = plattenZeile - 1; z < plattenZeile + 1; z++)
+			for (int z = plattenZeile - 1; z <= plattenZeile + 1; z++)
 			{
-				if (spielfeld[s][z].istHundehaufenAufPlatte())
+				if (s < spielfeld.length && z < spielfeld[0].length && s >= 0
+						&& z >= 0)
 				{
-					angrenzendeHundehaufenZaehler++;
+
+					if (spielfeld[s][z].istHundehaufenAufPlatte())
+					{
+						angrenzendeHundehaufenZaehler++;
+					}
 				}
 			}
 		}
