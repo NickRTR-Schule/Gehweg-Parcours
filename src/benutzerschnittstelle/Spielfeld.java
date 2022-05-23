@@ -190,12 +190,14 @@ public final class Spielfeld extends JFrame
 					.leseSpalten(); zaehlerSpalte++)
 			{
 
-				// Knopf erstellen
-				final JButton button = new JButton();
-				button.setPreferredSize(new Dimension(20, 20));
 				// Platte an der aktuellen Position bekommen
 				final Platte platte = spiel.lesePlatte(zaehlerSpalte,
 						zaehlerZeile);
+
+				// Knopf erstellen
+				final JButton button = platte.leseButton();
+				button.setPreferredSize(new Dimension(20, 20));
+
 				// Icon festlegen
 				button.setIcon(zugedecktIcon);
 				// MouseListener hinzufuegen
