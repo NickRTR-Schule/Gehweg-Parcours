@@ -228,46 +228,57 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void mouseClicked(MouseEvent mausKlick)
 					{
-						// Linksklick
-						if (mausKlick.getButton() == MouseEvent.BUTTON1)
+						if (button.getIcon().equals(fahneIcon))
 						{
-							if (platte.istHundehaufenAufPlatte())
+							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
-								button.setIcon(kackeIcon);
-								JOptionPane.showMessageDialog(null,
-										spiel.verloren());
-							}
-							else
-							{
-								// Angrenzende Hundehaufen anzeigen
-								/*
-								 * Icon "entfernen", damit genug Platz f�r die
-								 * Zahl vorhanden ist
-								 */
-								button.setIcon(null);
-								final int angrenzendeHundehaufen = spiel
-										.leseAngrenzendeHundehaufen(
-												platte.leseSpalte(),
-												platte.leseZeile());
-								button.setText(Integer
-										.toString(angrenzendeHundehaufen));
+								button.setIcon(zugedecktIcon);
 							}
 						}
 						else
 						{
-							// Rechtsklick
-							if (mausKlick.getButton() == MouseEvent.BUTTON3)
+							// Linksklick
+							if (mausKlick.getButton() == MouseEvent.BUTTON1)
 							{
-								// Vermutung durch Fahne anzeigen
-								button.setIcon(fahneIcon);
+								if (platte.istHundehaufenAufPlatte())
+								{
+									button.setIcon(kackeIcon);
+									JOptionPane.showMessageDialog(null,
+											spiel.verloren());
+								}
+								else
+								{
+									// Angrenzende Hundehaufen anzeigen
+									/*
+									 * Icon "entfernen", damit genug Platz f�r
+									 * die Zahl vorhanden ist
+									 */
+									button.setIcon(null);
+									final int angrenzendeHundehaufen = spiel
+											.leseAngrenzendeHundehaufen(
+													platte.leseSpalte(),
+													platte.leseZeile());
+									button.setText(Integer
+											.toString(angrenzendeHundehaufen));
+								}
 							}
 							else
 							{
-								// Weder Links- noch Rechtsklick. Insofern ist
-								// es fuer dieses Programm irrelevant
+								// Rechtsklick
+								if (mausKlick.getButton() == MouseEvent.BUTTON3)
+								{
+									// Vermutung durch Fahne anzeigen
+									button.setIcon(fahneIcon);
+								}
+								else
+								{
+									// Weder Links- noch Rechtsklick. Insofern
+									// ist
+									// es fuer dieses Programm irrelevant
+								}
 							}
-						}
 
+						}
 					}
 				});
 				panel.add(button);
