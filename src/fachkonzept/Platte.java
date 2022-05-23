@@ -1,5 +1,7 @@
 package fachkonzept;
 
+import javax.swing.JButton;
+
 /**
  * Dieses Objekt repraesentiert eine einzelne Platte im Spiel.
  * 
@@ -14,6 +16,8 @@ public final class Platte
 	// auf dem Spielfeld
 	private final int spalte;
 	private final int zeile;
+
+	private JButton button;
 
 	private boolean vermutungGesetzt;
 
@@ -85,6 +89,11 @@ public final class Platte
 	public boolean leseVermutung()
 	{
 		return vermutungGesetzt;
+	}
+
+	public JButton leseButton()
+	{
+		return button;
 	}
 
 }
