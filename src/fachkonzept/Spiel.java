@@ -18,12 +18,16 @@ public final class Spiel
 	 */
 	private final Platte[][] spielfeld;
 
-	private int anzahlHundehaufen = 20;
-	private int vermutungenGesetzt = 0;
+	private final int maximaleAnzahlHundehaufen;
+	private int anzahlHundehaufen;
+	private int vermutungenGesetzt;
 
 	public Spiel()
 	{
 		spielfeld = new Platte[6][14];
+		maximaleAnzahlHundehaufen = 20;
+		anzahlHundehaufen = 20;
+		vermutungenGesetzt = 0;
 		initialisieren();
 		verteileHundehaufen();
 	}
@@ -75,7 +79,7 @@ public final class Spiel
 
 	public int leseMaximaleHundehaufen()
 	{
-		return anzahlHundehaufen;
+		return maximaleAnzahlHundehaufen;
 	}
 
 	/**
