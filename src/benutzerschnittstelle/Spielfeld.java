@@ -181,13 +181,13 @@ public final class Spielfeld extends JFrame
 			return;
 		}
 
-		// For-Schleife fuer die Spalten
-		for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
-				.leseSpalten(); zaehlerSpalte++)
+		// For-Schleife fuer die Zeilen
+		for (int zaehlerZeile = 0; zaehlerZeile < spiel
+				.leseZeilen(); zaehlerZeile++)
 		{
-			// For-Schleife fuer die Zeilen in einer Spalte
-			for (int zaehlerZeile = 0; zaehlerZeile < spiel
-					.leseZeilen(); zaehlerZeile++)
+			// For-Schleife fuer die Spalten in einer Zeile
+			for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
+					.leseSpalten(); zaehlerSpalte++)
 			{
 
 				// Knopf erstellen
@@ -270,10 +270,7 @@ public final class Spielfeld extends JFrame
 
 					}
 				});
-				// TODO: Grid Layout Add Funktion untersuchen um herauszufinden
-				// wo das Problem liegt.
-				// Relevanz: Zahlen fuer die umliegenden Hundehaufen.
-				panel.add(button, zaehlerZeile, zaehlerSpalte);
+				panel.add(button);
 			}
 		}
 	}
