@@ -5,15 +5,20 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,12 +38,13 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Die SerialVersionUID Dies steht fuer "unique identification"
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1709700203173877403L;
 
 	/**
 	 * Das Hauptpanel in dem Fenster
 	 */
 	private JPanel panel = new JPanel(new GridLayout(14, 6));
+	static private Spielfeld fenster = new Spielfeld();
 
 	/**
 	 * Launch the application.
@@ -50,17 +56,11 @@ public final class Spielfeld extends JFrame
 			@Override
 			public void run()
 			{
-				try
-				{
-					Spielfeld fenster = new Spielfeld();
-					fenster.setVisible(true);
-				}
-				catch (Exception fehler)
-				{
-					fehler.printStackTrace();
-				}
+
+				fenster.setVisible(true);
 			}
 		});
+
 	}
 
 	/**
@@ -104,7 +104,8 @@ public final class Spielfeld extends JFrame
 
 		// Minimale Größe setzen
 		// Das Fenster kann nicht kleiner als diese Größe sein.
-		setMinimumSize(new Dimension(getBounds().width, getBounds().height));
+		setMinimumSize(
+				new Dimension(getBounds().width, getBounds().height + 25));
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -124,6 +125,38 @@ public final class Spielfeld extends JFrame
 	 */
 	private void objekteHinzufuegen()
 	{
+
+		// Menue bar hinzufügen
+		final JMenuBar menuBar = new JMenuBar();
+		final JMenu menu = new JMenu("Optionen");
+		final JMenuItem neustartItem = new JMenuItem(
+				new AbstractAction("Spiel neustarten")
+				{
+
+					private static final long serialVersionUID = 881040705104374571L;
+
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						final int optiongewaehlt = JOptionPane
+								.showConfirmDialog(null,
+										"Möchten Sie das Spiel wirklich neustarten?");
+						if (optiongewaehlt == JOptionPane.YES_OPTION)
+						{
+							if (fenster != null)
+							{
+								fenster.setVisible(false);
+								fenster.dispose();
+							}
+							fenster = new Spielfeld();
+							fenster.setVisible(true);
+						}
+					}
+				});
+		menu.add(neustartItem);
+		menuBar.add(menu);
+		setJMenuBar(menuBar);
+
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
 
@@ -230,7 +263,8 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void mouseClicked(MouseEvent mausKlick)
 					{
-						if (platte.leseVermutung())
+						if (platte.leseVermutung()
+								&& !platte.leseIstAufgedeckt())
 						{
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
@@ -244,12 +278,14 @@ public final class Spielfeld extends JFrame
 							// Linksklick
 							if (mausKlick.getButton() == MouseEvent.BUTTON1)
 							{
+								platte.setzteIstAufgedeckt();
 								if (platte.istHundehaufenAufPlatte())
 								{
 									button.setIcon(kackeIcon);
 									JOptionPane.showMessageDialog(null,
 											spiel.verloren());
-									allePlattenAufdecken(spiel, button, kackeIcon);
+									allePlattenAufdecken(spiel, button,
+											kackeIcon);
 									System.exit(0);
 								}
 								else
@@ -274,7 +310,8 @@ public final class Spielfeld extends JFrame
 								if (mausKlick.getButton() == MouseEvent.BUTTON3)
 								{
 									if (spiel.leseVermutungen() < spiel
-											.leseMaximaleHundehaufen())
+											.leseMaximaleHundehaufen()
+											&& !platte.leseIstAufgedeckt())
 									{
 										// Vermutung durch Fahne anzeigen
 										button.setIcon(fahneIcon);
@@ -299,10 +336,13 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
-	public void allePlattenAufdecken(Spiel spiel, JButton button, ImageIcon kackeIcon)
+	public void allePlattenAufdecken(Spiel spiel, JButton button,
+			ImageIcon kackeIcon)
 	{
-		// TODO: Wenn das Spiel verloren ist, sollen alle Platten aufgedeckt werden.
-		// funktioniert nicht, weil immer der Button uebergeben wird auf den als letztes gedr�ckt wurde -> refactoring der Platten Klasse
+		// TODO: Wenn das Spiel verloren ist, sollen alle Platten aufgedeckt
+		// werden.
+		// funktioniert nicht, weil immer der Button uebergeben wird auf den als
+		// letztes gedr�ckt wurde -> refactoring der Platten Klasse
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
 				.leseZeilen(); zaehlerZeile++)
 		{

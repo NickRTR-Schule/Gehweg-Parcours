@@ -20,6 +20,7 @@ public final class Platte
 	private JButton button;
 
 	private boolean vermutungGesetzt;
+	private boolean istAufgedeckt;
 
 	public Platte(int pSpalte, int pZeile)
 	{
@@ -27,6 +28,8 @@ public final class Platte
 		zeile = pZeile;
 		hatHundehaufen = false;
 		vermutungGesetzt = false;
+		istAufgedeckt = false;
+		button = new JButton();
 	}
 
 	public void setzeHundehaufen()
@@ -94,6 +97,16 @@ public final class Platte
 	public JButton leseButton()
 	{
 		return button;
+	}
+
+	public boolean leseIstAufgedeckt()
+	{
+		return istAufgedeckt;
+	}
+
+	public void setzteIstAufgedeckt()
+	{
+		istAufgedeckt = true;
 	}
 
 }
