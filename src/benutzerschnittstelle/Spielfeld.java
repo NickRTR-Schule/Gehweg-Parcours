@@ -139,7 +139,7 @@ public final class Spielfeld extends JFrame
 					{
 						final int optiongewaehlt = JOptionPane
 								.showConfirmDialog(null,
-										"Möchten Sie das Spiel wirklich neustarten?");
+										"M�chten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
 							if (fenster != null)
@@ -283,9 +283,12 @@ public final class Spielfeld extends JFrame
 									button.setIcon(kackeIcon);
 									JOptionPane.showMessageDialog(null,
 											spiel.verloren());
-									allePlattenAufdecken(spiel, button,
-											kackeIcon);
-									System.exit(0);
+									allePlattenAufdecken(spiel, kackeIcon);
+									// BUG: Spiel wird nicht beendet, sonst
+									// werden Platten nicht aufgedeckt
+									// BUG: Vielleicht wäre dafür ein Timer gut?
+									// Oder der Benutzer muss selbst beenden
+									// System.exit(0);
 								}
 								else
 								{
@@ -349,13 +352,8 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
-	public void allePlattenAufdecken(Spiel spiel, JButton button,
-			ImageIcon kackeIcon)
+	public void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
 	{
-		// TODO: Wenn das Spiel verloren ist, sollen alle Platten aufgedeckt
-		// werden.
-		// funktioniert nicht, weil immer der Button uebergeben wird auf den als
-		// letztes gedr�ckt wurde -> refactoring der Platten Klasse
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
 				.leseZeilen(); zaehlerZeile++)
 		{
@@ -363,9 +361,19 @@ public final class Spielfeld extends JFrame
 			for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
 					.leseSpalten(); zaehlerSpalte++)
 			{
-				// Knopf erstellen
-				button.setAction(null);
-				button.setIcon(kackeIcon);
+				// Platten aufdecken (Kacke wenn Kacke und lehre Platte wenn
+				// keine Kacke auf Platte)
+				if (spiel.lesePlatte(zaehlerSpalte, zaehlerZeile)
+						.istHundehaufenAufPlatte())
+				{
+					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
+							.setIcon(kackeIcon);
+				}
+				else
+				{
+					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
+							.setIcon(null);
+				}
 			}
 		}
 	}
