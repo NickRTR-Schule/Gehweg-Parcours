@@ -43,7 +43,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Das Hauptpanel in dem Fenster
 	 */
-	private JPanel panel = new JPanel(new GridLayout(14, 6));
+	private final JPanel panel = new JPanel(new GridLayout(14, 6));
 	static private Spielfeld fenster = new Spielfeld();
 
 	/**
@@ -56,7 +56,6 @@ public final class Spielfeld extends JFrame
 			@Override
 			public void run()
 			{
-
 				fenster.setVisible(true);
 			}
 		});
@@ -333,6 +332,20 @@ public final class Spielfeld extends JFrame
 				});
 				panel.add(button);
 			}
+		}
+	}
+
+	public boolean tstGewonnen(Spiel spiel)
+	{
+		if (spiel.hatGewonnen())
+		{
+			JOptionPane.showConfirmDialog(null,
+					"Herzlichen Glueckwunsch! \n Moechten Sie nochmal spielen?");
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

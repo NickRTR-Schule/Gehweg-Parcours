@@ -38,16 +38,6 @@ public final class Platte
 	}
 
 	/**
-	 * Gibt zurueck, ob der Spieler sich auf dieser Platte befindet oder nicht.
-	 * 
-	 * @return wahr oder falsch
-	 */
-	public boolean istSpielerAufPlatte()
-	{
-		return false;
-	}
-
-	/**
 	 * Gibt zurueck, ob sich ein Hundehaufen auf dieser Platte befindet oder
 	 * nicht. Diese Methode kann benutzt werden, um herauszufinden, ob der
 	 * Spieler verloren hat oder nicht.
