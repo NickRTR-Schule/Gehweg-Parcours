@@ -26,7 +26,7 @@ public final class Spiel
 	{
 		spielfeld = new Platte[6][14];
 		maximaleAnzahlHundehaufen = 20;
-		anzahlHundehaufen = 20;
+		anzahlHundehaufen = 5;
 		vermutungenGesetzt = 0;
 		initialisieren();
 		verteileHundehaufen();
