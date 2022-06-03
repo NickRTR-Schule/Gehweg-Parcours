@@ -287,9 +287,8 @@ public final class Spielfeld extends JFrame
 									allePlattenAufdecken(spiel, kackeIcon);
 									
 									final int optiongewaehlt = JOptionPane
-											.showConfirmDialog(null, spiel
-													.verloren() + "\n"
-													+ "Moechten Sie das Spiel neustarten?");
+											.showConfirmDialog(null, /*spiel
+													.verloren()*/  "Das war jetzt Kacke..\nMoechten Sie das Spiel neustarten?");
 									if (optiongewaehlt == JOptionPane.YES_OPTION)
 									{
 										if (fenster != null)
@@ -309,9 +308,7 @@ public final class Spielfeld extends JFrame
 										else
 										{
 										}
-									}
-
-									
+									}									
 									// BUG: Spiel wird nicht beendet, sonst
 									// werden Platten nicht aufgedeckt
 									// BUG: Vielleicht wäre dafür ein Timer gut?
