@@ -277,62 +277,60 @@ public final class Spielfeld extends JFrame
 							// Linksklick
 							if (mausKlick.getButton() == MouseEvent.BUTTON1)
 							{
-								platte.setzteIstAufgedeckt();
-								if (platte.istHundehaufenAufPlatte())
+								if (platte.leseIstAufgedeckt())
 								{
-									button.setIcon(kackeIcon);
-									
-									
-									
-									allePlattenAufdecken(spiel, kackeIcon);
-									
-									final int optiongewaehlt = JOptionPane
-											.showConfirmDialog(null, spiel
-													.verloren() + "\n"
-													+ "Moechten Sie das Spiel neustarten?");
-									if (optiongewaehlt == JOptionPane.YES_OPTION)
-									{
-										if (fenster != null)
-										{
-											fenster.setVisible(false);
-											fenster.dispose();
-										}
-										fenster = new Spielfeld();
-										fenster.setVisible(true);
-									}
-									else
-									{
-										if (optiongewaehlt == JOptionPane.NO_OPTION)
-										{
-											System.exit(0);
-										}
-										else
-										{
-										}
-									}
-
-									
-									// BUG: Spiel wird nicht beendet, sonst
-									// werden Platten nicht aufgedeckt
-									// BUG: Vielleicht wäre dafür ein Timer gut?
-									// Oder der Benutzer muss selbst beenden
-									// System.exit(0);
+									return;
 								}
 								else
 								{
-									// Angrenzende Hundehaufen anzeigen
-									/*
-									 * Icon "entfernen", damit genug Platz fuer
-									 * die Zahl vorhanden ist
-									 */
-									button.setIcon(null);
-									final int angrenzendeHundehaufen = spiel
-											.leseAngrenzendeHundehaufen(
-													platte.leseSpalte(),
-													platte.leseZeile());
-									button.setText(Integer
-											.toString(angrenzendeHundehaufen));
-									tstGewonnen(spiel);
+									platte.setzteIstAufgedeckt();
+									if (platte.istHundehaufenAufPlatte())
+									{
+										button.setIcon(kackeIcon);
+										allePlattenAufdecken(spiel, kackeIcon);
+
+										final int optiongewaehlt = JOptionPane
+												.showConfirmDialog(null, spiel
+														.verloren() + "\n"
+														+ "Moechten Sie das Spiel neustarten?");
+										if (optiongewaehlt == JOptionPane.YES_OPTION)
+										{
+											if (fenster != null)
+											{
+												fenster.setVisible(false);
+												fenster.dispose();
+											}
+											fenster = new Spielfeld();
+											fenster.setVisible(true);
+										}
+										else
+										{
+											if (optiongewaehlt == JOptionPane.NO_OPTION)
+											{
+												System.exit(0);
+											}
+											else
+											{
+											}
+										}
+									}
+									else
+									{
+										// Angrenzende Hundehaufen anzeigen
+										/*
+										 * Icon "entfernen", damit genug Platz
+										 * fuer die Zahl vorhanden ist
+										 */
+										button.setIcon(null);
+										final int angrenzendeHundehaufen = spiel
+												.leseAngrenzendeHundehaufen(
+														platte.leseSpalte(),
+														platte.leseZeile());
+										button.setText(Integer.toString(
+												angrenzendeHundehaufen));
+										spiel.deckePlatteAuf();
+										tstGewonnen(spiel);
+									}
 								}
 							}
 							else
@@ -368,17 +366,12 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
-	public boolean tstGewonnen(Spiel spiel)
+	public void tstGewonnen(Spiel spiel)
 	{
 		if (spiel.hatGewonnen())
 		{
 			JOptionPane.showConfirmDialog(null,
 					"Herzlichen Glueckwunsch! \n Moechten Sie nochmal spielen?");
-			return true;
-		}
-		else
-		{
-			return false;
 		}
 	}
 

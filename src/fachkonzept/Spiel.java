@@ -19,15 +19,15 @@ public final class Spiel
 	private final Platte[][] spielfeld;
 
 	private final int maximaleAnzahlHundehaufen;
-	private int anzahlHundehaufen;
 	private int vermutungenGesetzt;
+	private int plattenAufgedeckt;
 
 	public Spiel()
 	{
 		spielfeld = new Platte[6][14];
 		maximaleAnzahlHundehaufen = 20;
-		anzahlHundehaufen = 5;
 		vermutungenGesetzt = 0;
+		plattenAufgedeckt = 0;
 		initialisieren();
 		verteileHundehaufen();
 	}
@@ -114,8 +114,8 @@ public final class Spiel
 	 */
 	private void verteileHundehaufen()
 	{
+		int anzahlHundehaufen = maximaleAnzahlHundehaufen;
 		Random random = new Random();
-		do
 		{
 			final int zeile = random.nextInt(leseZeilen());
 			final int spalte = random.nextInt(leseSpalten());
@@ -125,7 +125,9 @@ public final class Spiel
 				platte.setzeHundehaufen();
 				anzahlHundehaufen--;
 			}
-		} while (anzahlHundehaufen != 0);
+		}
+		while (anzahlHundehaufen != 0)
+			;
 	}
 
 	/**
@@ -153,6 +155,11 @@ public final class Spiel
 		return "Sie sind in Kacke getreten!";
 	}
 
+	public void deckePlatteAuf()
+	{
+		plattenAufgedeckt++;
+	}
+
 	/**
 	 * Gibt zurueck ob das Spiel gewonnen ist oder nicht
 	 * 
@@ -160,37 +167,15 @@ public final class Spiel
 	 */
 	public boolean hatGewonnen()
 	{
-		if (anzahlHundehaufen == maximaleAnzahlHundehaufen)
+		final int anzahlPlatten = leseSpalten() * leseZeilen();
+		final int zahlZuVergleichen = anzahlPlatten - maximaleAnzahlHundehaufen;
+		if (zahlZuVergleichen == plattenAufgedeckt)
 		{
-			for (int s = 0; s < maximaleAnzahlHundehaufen; s++)
-			{
-				for (int z = 0; z < maximaleAnzahlHundehaufen; z++)
-				{
-					final Platte platte = lesePlatte(s, z);
-					if (platte.istHundehaufenAufPlatte()
-							&& platte.leseVermutung())
-					{
-						continue;
-					}
-					else
-					{
-						if (!platte.istHundehaufenAufPlatte()
-								&& platte.leseIstAufgedeckt())
-						{
-							continue;
-						}
-						else
-						{
-							return false;
-						}
-					}
-				}
-			}
+			return true;
 		}
 		else
 		{
 			return false;
 		}
-		return true;
 	}
 }
