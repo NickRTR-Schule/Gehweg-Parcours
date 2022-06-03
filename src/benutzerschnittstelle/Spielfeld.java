@@ -363,19 +363,18 @@ public final class Spielfeld extends JFrame
 			for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
 					.leseSpalten(); zaehlerSpalte++)
 			{
+				Platte platte = spiel.lesePlatte(zaehlerSpalte, zaehlerZeile);
 				// Platten aufdecken (Kacke wenn Kacke und lehre Platte wenn
 				// keine Kacke auf Platte)
-				if (spiel.lesePlatte(zaehlerSpalte, zaehlerZeile)
-						.istHundehaufenAufPlatte())
+				if (platte.istHundehaufenAufPlatte())
 				{
-					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
-							.setIcon(kackeIcon);
+					platte.leseButton().setIcon(kackeIcon);
 				}
 				else
 				{
-					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
-							.setIcon(null);
+					platte.leseButton().setIcon(null);
 				}
+				platte.leseButton().setEnabled(false);
 			}
 		}
 	}
