@@ -281,9 +281,37 @@ public final class Spielfeld extends JFrame
 								if (platte.istHundehaufenAufPlatte())
 								{
 									button.setIcon(kackeIcon);
-									JOptionPane.showMessageDialog(null,
-											spiel.verloren());
+									
+									
+									
 									allePlattenAufdecken(spiel, kackeIcon);
+									
+									final int optiongewaehlt = JOptionPane
+											.showConfirmDialog(null, spiel
+													.verloren() + "\n"
+													+ "Moechten Sie das Spiel neustarten?");
+									if (optiongewaehlt == JOptionPane.YES_OPTION)
+									{
+										if (fenster != null)
+										{
+											fenster.setVisible(false);
+											fenster.dispose();
+										}
+										fenster = new Spielfeld();
+										fenster.setVisible(true);
+									}
+									else
+									{
+										if (optiongewaehlt == JOptionPane.NO_OPTION)
+										{
+											System.exit(0);
+										}
+										else
+										{
+										}
+									}
+
+									
 									// BUG: Spiel wird nicht beendet, sonst
 									// werden Platten nicht aufgedeckt
 									// BUG: Vielleicht wäre dafür ein Timer gut?
