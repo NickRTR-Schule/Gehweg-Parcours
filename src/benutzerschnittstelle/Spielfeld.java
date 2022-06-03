@@ -43,7 +43,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Das Hauptpanel in dem Fenster
 	 */
-	private JPanel panel = new JPanel(new GridLayout(14, 6));
+	private final JPanel panel = new JPanel(new GridLayout(14, 6));
 	static private Spielfeld fenster = new Spielfeld();
 
 	/**
@@ -56,7 +56,6 @@ public final class Spielfeld extends JFrame
 			@Override
 			public void run()
 			{
-
 				fenster.setVisible(true);
 			}
 		});
@@ -285,8 +284,10 @@ public final class Spielfeld extends JFrame
 									JOptionPane.showMessageDialog(null,
 											spiel.verloren());
 									allePlattenAufdecken(spiel, kackeIcon);
-									// BUG: Spiel wird nicht beendet, sonst werden Platten nicht aufgedeckt
-									// BUG: Vielleicht wäre dafür ein Timer gut? Oder der Benutzer muss selbst beenden
+									// BUG: Spiel wird nicht beendet, sonst
+									// werden Platten nicht aufgedeckt
+									// BUG: Vielleicht wäre dafür ein Timer gut?
+									// Oder der Benutzer muss selbst beenden
 									// System.exit(0);
 								}
 								else
@@ -337,8 +338,21 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
-	public void allePlattenAufdecken(Spiel spiel,
-			ImageIcon kackeIcon)
+	public boolean tstGewonnen(Spiel spiel)
+	{
+		if (spiel.hatGewonnen())
+		{
+			JOptionPane.showConfirmDialog(null,
+					"Herzlichen Glueckwunsch! \n Moechten Sie nochmal spielen?");
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
 	{
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
 				.leseZeilen(); zaehlerZeile++)
@@ -347,11 +361,18 @@ public final class Spielfeld extends JFrame
 			for (int zaehlerSpalte = 0; zaehlerSpalte < spiel
 					.leseSpalten(); zaehlerSpalte++)
 			{
-				// Platten aufdecken (Kacke wenn Kacke und lehre Platte wenn keine Kacke auf Platte)
-				if (spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).istHundehaufenAufPlatte()) {
-					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton().setIcon(kackeIcon);
-				} else {
-					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton().setIcon(null);
+				// Platten aufdecken (Kacke wenn Kacke und lehre Platte wenn
+				// keine Kacke auf Platte)
+				if (spiel.lesePlatte(zaehlerSpalte, zaehlerZeile)
+						.istHundehaufenAufPlatte())
+				{
+					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
+							.setIcon(kackeIcon);
+				}
+				else
+				{
+					spiel.lesePlatte(zaehlerSpalte, zaehlerZeile).leseButton()
+							.setIcon(null);
 				}
 			}
 		}

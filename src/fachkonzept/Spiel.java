@@ -152,4 +152,45 @@ public final class Spiel
 	{
 		return "Sie sind in Kacke getreten!";
 	}
+
+	/**
+	 * Gibt zurueck ob das Spiel gewonnen ist oder nicht
+	 * 
+	 * @return boolean
+	 */
+	public boolean hatGewonnen()
+	{
+		if (anzahlHundehaufen == maximaleAnzahlHundehaufen)
+		{
+			for (int s = 0; s < maximaleAnzahlHundehaufen; s++)
+			{
+				for (int z = 0; z < maximaleAnzahlHundehaufen; z++)
+				{
+					final Platte platte = lesePlatte(s, z);
+					if (platte.istHundehaufenAufPlatte()
+							&& platte.leseVermutung())
+					{
+						continue;
+					}
+					else
+					{
+						if (!platte.istHundehaufenAufPlatte()
+								&& platte.leseIstAufgedeckt())
+						{
+							continue;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		return true;
+	}
 }
