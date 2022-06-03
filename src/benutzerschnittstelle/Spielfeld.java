@@ -304,6 +304,7 @@ public final class Spielfeld extends JFrame
 													platte.leseZeile());
 									button.setText(Integer
 											.toString(angrenzendeHundehaufen));
+									tstGewonnen(spiel);
 								}
 							}
 							else
@@ -319,6 +320,7 @@ public final class Spielfeld extends JFrame
 										button.setIcon(fahneIcon);
 										spiel.fuegeVermutungHinzu();
 										platte.setzeVermutung();
+										tstGewonnen(spiel);
 									}
 
 								}
