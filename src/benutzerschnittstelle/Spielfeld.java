@@ -293,25 +293,24 @@ public final class Spielfeld extends JFrame
 												.showConfirmDialog(null, spiel
 														.verloren() + "\n"
 														+ "Moechten Sie das Spiel neustarten?");
-										if (optiongewaehlt == JOptionPane.YES_OPTION)
+										switch (optiongewaehlt)
 										{
-											if (fenster != null)
-											{
-												fenster.setVisible(false);
-												fenster.dispose();
-											}
-											fenster = new Spielfeld();
-											fenster.setVisible(true);
-										}
-										else
-										{
-											if (optiongewaehlt == JOptionPane.NO_OPTION)
-											{
+											case JOptionPane.YES_OPTION:
+												if (fenster != null)
+												{
+													fenster.setVisible(false);
+													fenster.dispose();
+												}
+												fenster = new Spielfeld();
+												fenster.setVisible(true);
+												break;
+
+											case JOptionPane.NO_OPTION:
 												System.exit(0);
-											}
-											else
-											{
-											}
+												break;
+
+											default:
+												break;
 										}
 									}
 									else
@@ -348,7 +347,6 @@ public final class Spielfeld extends JFrame
 										platte.setzeVermutung();
 										tstGewonnen(spiel);
 									}
-
 								}
 								else
 								{
@@ -357,7 +355,6 @@ public final class Spielfeld extends JFrame
 									// es fuer dieses Programm irrelevant
 								}
 							}
-
 						}
 					}
 				});

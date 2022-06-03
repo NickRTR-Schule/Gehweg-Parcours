@@ -116,6 +116,7 @@ public final class Spiel
 	{
 		int anzahlHundehaufen = maximaleAnzahlHundehaufen;
 		Random random = new Random();
+		do
 		{
 			final int zeile = random.nextInt(leseZeilen());
 			final int spalte = random.nextInt(leseSpalten());
@@ -125,9 +126,7 @@ public final class Spiel
 				platte.setzeHundehaufen();
 				anzahlHundehaufen--;
 			}
-		}
-		while (anzahlHundehaufen != 0)
-			;
+		} while (anzahlHundehaufen != 0);
 	}
 
 	/**
