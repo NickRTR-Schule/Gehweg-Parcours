@@ -92,7 +92,7 @@ public final class Spielfeld extends JFrame
 		// Border Layout hinzufügen
 		contentPane.add(panel, BorderLayout.NORTH);
 
-		// Standard Größe festlegen
+		// Standard Groeße festlegen
 		panel.setPreferredSize(new Dimension(320, 560));
 
 		// Border / Rand festlegen
@@ -101,8 +101,8 @@ public final class Spielfeld extends JFrame
 		// Inhalts panel festlegen
 		setContentPane(contentPane);
 
-		// Minimale Größe setzen
-		// Das Fenster kann nicht kleiner als diese Größe sein.
+		// Minimale Groeße setzen
+		// Das Fenster kann nicht kleiner als diese Groeße sein.
 		setMinimumSize(
 				new Dimension(getBounds().width, getBounds().height + 25));
 
@@ -139,7 +139,7 @@ public final class Spielfeld extends JFrame
 					{
 						final int optiongewaehlt = JOptionPane
 								.showConfirmDialog(null,
-										"M�chten Sie das Spiel wirklich neustarten?");
+										"Moechten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
 							if (fenster != null)
