@@ -21,12 +21,14 @@ Kriterien, die ein Increment erfüllen muss, um bereit zum Release zu sein:
 
 ## Sprint Retrospective
 
--> eigene Arbeitsweise bewerten, aus Fehlern lernen
+*eigene Arbeitsweise bewerten, aus Fehlern lernen*
 
 - Verhalten
 - Zusammenarbeit
 - Vorgehensweise
 - Werkzeuge
+
+---
 
 - Was war hilfreich?
 - Was war hinderlich? Wie können wir das zukünftig besser machen?
