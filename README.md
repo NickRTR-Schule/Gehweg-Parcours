@@ -18,3 +18,15 @@ Kriterien, die ein Increment erfüllen muss, um bereit zum Release zu sein:
 - Was habe ich seit dem letzten Daily Scrum erreicht?
 - Was plane ich, bis zum nächsten Daily Scrum zu erreichen?
 - Welche Hindernisse gibt es für mich aktuell?
+
+## Sprint Retrospective
+
+-> eigene Arbeitsweise bewerten, aus Fehlern lernen
+
+- Verhalten
+- Zusammenarbeit
+- Vorgehensweise
+- Werkzeuge
+
+- Was war hilfreich?
+- Was war hinderlich? Wie können wir das zukünftig besser machen?
