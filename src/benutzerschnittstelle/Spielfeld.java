@@ -1,7 +1,6 @@
 package benutzerschnittstelle;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -46,6 +45,7 @@ public final class Spielfeld extends JFrame
 	 */
 	private final JPanel panel = new JPanel(new GridLayout(14, 6));
 	static private Spielfeld fenster = new Spielfeld();
+	private int anzahlHundehaufen;
 
 	/**
 	 * Launch the application.
@@ -68,6 +68,23 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
+
+		final String anzahlHundehaufenString = JOptionPane.showInputDialog(
+				"Wie viele Hundehaufen moechten Sie auf dem Spielfeld haben?");
+		try
+		{
+			anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
+			if (anzahlHundehaufen < 1)
+			{
+				throw new NumberFormatException();
+			}
+		}
+		catch (NumberFormatException exception)
+		{
+			JOptionPane.showMessageDialog(fenster,
+					"Die Anzahl der Hundehaufen muss eine positive Zahl sein.");
+			System.exit(0);
+		}
 		// Initialisieren
 		initialisieren();
 
@@ -157,8 +174,8 @@ public final class Spielfeld extends JFrame
 		setJMenuBar(menuBar);
 
 		// erstelle Spiel
-		final Spiel spiel = new Spiel();
-		
+		final Spiel spiel = new Spiel(anzahlHundehaufen);
+
 		// Start Platte aufdecken
 		startPlatteAufdecken(spiel);
 
@@ -236,7 +253,8 @@ public final class Spielfeld extends JFrame
 				// Icon festlegen
 				if (!platte.leseIstAufgedeckt())
 				{
-					// wenn die platte nicht bereits zu Anfang aufgedeckt ist (Startplatte) setzte sie als Gehwegplatte
+					// wenn die platte nicht bereits zu Anfang aufgedeckt ist
+					// (Startplatte) setzte sie als Gehwegplatte
 					button.setIcon(zugedecktIcon);
 				}
 				// MouseListener hinzufuegen
@@ -403,30 +421,29 @@ public final class Spielfeld extends JFrame
 			}
 		}
 	}
-	
+
 	public void startPlatteAufdecken(Spiel spiel)
 	{
 		// Nach Verteilung der Platten: Startplatte aufdecken
-		
-		int plattenSpalte = (int)(Math.random() * spiel.leseSpalten());
-		int plattenZeile = (int)(Math.random() * spiel.leseZeilen());
-		
+
+		int plattenSpalte = (int) (Math.random() * spiel.leseSpalten());
+		int plattenZeile = (int) (Math.random() * spiel.leseZeilen());
+
 		Platte platte = spiel.lesePlatte(plattenSpalte, plattenZeile);
-		
+
 		platte.setzteIstAufgedeckt();
 		if (platte.istHundehaufenAufPlatte())
 		{
-			// falls ein Hundehaufen auf der zufälligen Startplatte ist, neue Platte auswaehlen
+			// falls ein Hundehaufen auf der zufälligen Startplatte ist, neue
+			// Platte auswaehlen
 			startPlatteAufdecken(spiel);
-		} else
+		}
+		else
 		{
 			final JButton button = platte.leseButton();
-			final int angrenzendeHundehaufen = spiel
-					.leseAngrenzendeHundehaufen(
-							platte.leseSpalte(),
-							platte.leseZeile());
-			button.setText(Integer.toString(
-					angrenzendeHundehaufen));
+			final int angrenzendeHundehaufen = spiel.leseAngrenzendeHundehaufen(
+					platte.leseSpalte(), platte.leseZeile());
+			button.setText(Integer.toString(angrenzendeHundehaufen));
 		}
 	}
 }
