@@ -429,7 +429,7 @@ public final class Spielfeld extends JFrame
 		int plattenSpalte = (int) (Math.random() * spiel.leseSpalten());
 		int plattenZeile = (int) (Math.random() * spiel.leseZeilen());
 
-		Platte platte = spiel.lesePlatte(plattenSpalte, plattenZeile);
+		final Platte platte = spiel.lesePlatte(plattenSpalte, plattenZeile);
 
 		platte.setzteIstAufgedeckt();
 		if (platte.istHundehaufenAufPlatte())
