@@ -1,6 +1,11 @@
 package fachkonzept;
 
+import java.awt.Button;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import benutzerschnittstelle.Spielfeld;
 
 /**
  * Dieses Objekt repraesentiert das Spiel. Hier findet die Logik des Hundehaufen
@@ -45,8 +50,6 @@ public final class Spiel
 						zaehlerSpalte, zaehlerZeile);
 			}
 		}
-		
-		// Nach Verteilung der Platten: Startplatte aufdecken
 	}
 
 	/**

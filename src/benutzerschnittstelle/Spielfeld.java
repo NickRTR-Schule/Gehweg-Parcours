@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -72,7 +73,6 @@ public final class Spielfeld extends JFrame
 
 		// Objekte zu dem Fenster hinzuzufuegen
 		objekteHinzufuegen();
-
 	}
 
 	/**
@@ -158,6 +158,9 @@ public final class Spielfeld extends JFrame
 
 		// erstelle Spiel
 		final Spiel spiel = new Spiel();
+		
+		// Start Platte aufdecken
+		startPlatteAufdecken(spiel);
 
 		// Kacke Icon laden
 		final InputStream kackeAlsStream = Spielfeld.class.getClassLoader()
@@ -231,7 +234,11 @@ public final class Spielfeld extends JFrame
 				button.setPreferredSize(new Dimension(20, 20));
 
 				// Icon festlegen
-				button.setIcon(zugedecktIcon);
+				if (!platte.leseIstAufgedeckt())
+				{
+					// wenn die platte nicht bereits zu Anfang aufgedeckt ist (Startplatte) setzte sie als Gehwegplatte
+					button.setIcon(zugedecktIcon);
+				}
 				// MouseListener hinzufuegen
 				button.addMouseListener(new MouseListener()
 				{
@@ -394,6 +401,32 @@ public final class Spielfeld extends JFrame
 				}
 				platte.leseButton().setEnabled(false);
 			}
+		}
+	}
+	
+	public void startPlatteAufdecken(Spiel spiel)
+	{
+		// Nach Verteilung der Platten: Startplatte aufdecken
+		
+		int plattenSpalte = (int)(Math.random() * spiel.leseSpalten());
+		int plattenZeile = (int)(Math.random() * spiel.leseZeilen());
+		
+		Platte platte = spiel.lesePlatte(plattenSpalte, plattenZeile);
+		
+		platte.setzteIstAufgedeckt();
+		if (platte.istHundehaufenAufPlatte())
+		{
+			// falls ein Hundehaufen auf der zufälligen Startplatte ist, neue Platte auswaehlen
+			startPlatteAufdecken(spiel);
+		} else
+		{
+			final JButton button = platte.leseButton();
+			final int angrenzendeHundehaufen = spiel
+					.leseAngrenzendeHundehaufen(
+							platte.leseSpalte(),
+							platte.leseZeile());
+			button.setText(Integer.toString(
+					angrenzendeHundehaufen));
 		}
 	}
 }
