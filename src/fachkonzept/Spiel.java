@@ -45,6 +45,8 @@ public final class Spiel
 						zaehlerSpalte, zaehlerZeile);
 			}
 		}
+		
+		// Nach Verteilung der Platten: Startplatte aufdecken
 	}
 
 	/**
