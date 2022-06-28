@@ -68,23 +68,37 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
-
-		final String anzahlHundehaufenString = JOptionPane.showInputDialog(
-				"Wie viele Hundehaufen möchten Sie auf dem Spielfeld haben?");
-		try
+		boolean bedingung = false;
+		do
 		{
-			anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
-			if (anzahlHundehaufen < 1)
+			final String anzahlHundehaufenString = JOptionPane.showInputDialog(
+					"Wie viele Hundehaufen möchten Sie auf dem Spielfeld haben?",
+					20);
+			try
 			{
-				throw new NumberFormatException();
+				anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
+				if (anzahlHundehaufen < 1)
+				{
+					throw new NumberFormatException();
+				}
 			}
-		}
-		catch (NumberFormatException exception)
-		{
-			JOptionPane.showMessageDialog(fenster,
-					"Die Anzahl der Hundehaufen muss eine positive Zahl sein.");
-			System.exit(0);
-		}
+			catch (NumberFormatException exception)
+			{
+				JOptionPane.showMessageDialog(fenster,
+						"Die Anzahl der Hundehaufen muss eine positive Zahl sein.");
+				final int antwort = JOptionPane.showConfirmDialog(fenster,
+						"Möchten Sie die Eingabe wiederholen?");
+				if (antwort == JOptionPane.YES_OPTION)
+				{
+					bedingung = true;
+				}
+				else
+				{
+					System.exit(0);
+				}
+			}
+		} while (bedingung);
+
 		// Initialisieren
 		initialisieren();
 
