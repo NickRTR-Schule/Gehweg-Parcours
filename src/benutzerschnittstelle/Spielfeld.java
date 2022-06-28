@@ -70,7 +70,7 @@ public final class Spielfeld extends JFrame
 	{
 
 		final String anzahlHundehaufenString = JOptionPane.showInputDialog(
-				"Wie viele Hundehaufen moechten Sie auf dem Spielfeld haben?");
+				"Wie viele Hundehaufen möchten Sie auf dem Spielfeld haben?");
 		try
 		{
 			anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
@@ -156,7 +156,7 @@ public final class Spielfeld extends JFrame
 					{
 						final int optiongewaehlt = JOptionPane
 								.showConfirmDialog(null,
-										"Moechten Sie das Spiel wirklich neustarten?");
+										"Möchten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
 							if (fenster != null)
@@ -317,7 +317,7 @@ public final class Spielfeld extends JFrame
 										final int optiongewaehlt = JOptionPane
 												.showConfirmDialog(null, spiel
 														.verloren() + "\n"
-														+ "Moechten Sie das Spiel neustarten?");
+														+ "Möchten Sie das Spiel neustarten?");
 										switch (optiongewaehlt)
 										{
 											case JOptionPane.YES_OPTION:
@@ -393,7 +393,7 @@ public final class Spielfeld extends JFrame
 		if (spiel.hatGewonnen())
 		{
 			JOptionPane.showConfirmDialog(null,
-					"Herzlichen Glueckwunsch! \n Moechten Sie nochmal spielen?");
+					"Herzlichen Glückwunsch! \n Möchten Sie nochmal spielen?");
 		}
 	}
 
