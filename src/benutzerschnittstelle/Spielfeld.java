@@ -16,11 +16,13 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import fachkonzept.Platte;
@@ -43,9 +45,11 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Das Hauptpanel in dem Fenster
 	 */
-	private final JPanel panel = new JPanel(new GridLayout(14, 6));
+	private final JPanel panel;
 	static private Spielfeld fenster = new Spielfeld();
 	private int anzahlHundehaufen;
+	private int spalten;
+	private int zeilen;
 
 	/**
 	 * Launch the application.
@@ -68,6 +72,67 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
+		// Spalten und Zeilen festlegen
+		final JPanel inputPanel = new JPanel();
+		final JTextField spaltenFeld = new JTextField("4");
+		final JTextField zeilenFeld = new JTextField("16");
+		inputPanel.setLayout(new GridLayout(4, 1));
+		inputPanel.add(new JLabel("Spalten:"));
+		inputPanel.add(spaltenFeld);
+		inputPanel.add(new JLabel("Zeilen"));
+		inputPanel.add(zeilenFeld);
+		boolean ersteBedingung = false;
+		do
+		{
+			final int spielfeldFestlegenAntwort = JOptionPane
+					.showConfirmDialog(fenster, inputPanel);
+			if (spielfeldFestlegenAntwort == JOptionPane.YES_OPTION)
+			{
+				final String spaltenString = spaltenFeld.getText();
+				final String zeilenString = zeilenFeld.getText();
+				try
+				{
+					spalten = Integer.parseInt(spaltenString);
+					zeilen = Integer.parseInt(zeilenString);
+					if (zeilen < 1 || spalten < 1)
+					{
+						throw new NumberFormatException();
+					}
+					ersteBedingung = false;
+				}
+				catch (NumberFormatException exception)
+				{
+					JOptionPane.showMessageDialog(inputPanel,
+							"Die Anzahl der Zeilen / Spalten muss eine positive Zahl sein.");
+					final int antwort = JOptionPane.showConfirmDialog(fenster,
+							"Möchten Sie die Eingabe wiederholen?");
+					if (antwort == JOptionPane.YES_OPTION)
+					{
+						ersteBedingung = true;
+					}
+					else
+					{
+						System.exit(0);
+					}
+				}
+			}
+			else
+			{
+				final int schliesenAntwort = JOptionPane.showConfirmDialog(
+						inputPanel, "Wollen Sie das Spiel wirklich beenden?");
+				if (schliesenAntwort == JOptionPane.YES_OPTION)
+				{
+					System.exit(0);
+				}
+				else
+				{
+					ersteBedingung = true;
+				}
+			}
+		} while (ersteBedingung);
+		panel = new JPanel(new GridLayout(zeilen, spalten));
+
+		// Hundehaufen festlegen
 		boolean bedingung = false;
 		do
 		{
@@ -77,15 +142,17 @@ public final class Spielfeld extends JFrame
 			try
 			{
 				anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
-				if (anzahlHundehaufen < 1)
+				if (anzahlHundehaufen < 1
+						|| anzahlHundehaufen > (spalten * zeilen - 1))
 				{
 					throw new NumberFormatException();
 				}
+				bedingung = false;
 			}
 			catch (NumberFormatException exception)
 			{
 				JOptionPane.showMessageDialog(fenster,
-						"Die Anzahl der Hundehaufen muss eine positive Zahl sein.");
+						"Die Anzahl der Hundehaufen muss eine positive Zahl sein und darf nicht mehr als eins weniger als ihre Spielfeldgröße betragen.");
 				final int antwort = JOptionPane.showConfirmDialog(fenster,
 						"Möchten Sie die Eingabe wiederholen?");
 				if (antwort == JOptionPane.YES_OPTION)
@@ -188,7 +255,7 @@ public final class Spielfeld extends JFrame
 		setJMenuBar(menuBar);
 
 		// erstelle Spiel
-		final Spiel spiel = new Spiel(anzahlHundehaufen);
+		final Spiel spiel = new Spiel(anzahlHundehaufen, spalten, zeilen);
 
 		// Start Platte aufdecken
 		startPlatteAufdecken(spiel);
@@ -402,6 +469,12 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Testes ob das Spiel gewonnen ist oder nicht.
+	 * 
+	 * @param spiel
+	 *            - das aktuelle Spiel
+	 */
 	public void tstGewonnen(Spiel spiel)
 	{
 		if (spiel.hatGewonnen())
@@ -411,6 +484,14 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Deckt alle Platten eines Spiels auf.
+	 * 
+	 * @param spiel
+	 *            - das aktuelle Spiel
+	 * @param kackeIcon
+	 *            - Das Icon der Kacke
+	 */
 	public void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
 	{
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
@@ -436,6 +517,13 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Deckt eine beliebige Platte, auf welcher sich kein Hundehaufen befindet
+	 * auf.
+	 * 
+	 * @param spiel
+	 *            - Das aktuelle Spiel
+	 */
 	public void startPlatteAufdecken(Spiel spiel)
 	{
 		// Nach Verteilung der Platten: Startplatte aufdecken

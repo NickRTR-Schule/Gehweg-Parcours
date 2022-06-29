@@ -22,9 +22,9 @@ public final class Spiel
 	private int vermutungenGesetzt;
 	private int plattenAufgedeckt;
 
-	public Spiel(int maximaleAnzahlHundehaufen)
+	public Spiel(int maximaleAnzahlHundehaufen, int spalten, int zeilen)
 	{
-		spielfeld = new Platte[6][14];
+		spielfeld = new Platte[spalten][zeilen];
 		this.maximaleAnzahlHundehaufen = maximaleAnzahlHundehaufen;
 		vermutungenGesetzt = 0;
 		plattenAufgedeckt = 0;

@@ -25,7 +25,7 @@ public class SpielTest
 	@Test
 	public void testVerteileHundehaufen()
 	{
-		final Spiel spiel = new Spiel(20);
+		final Spiel spiel = new Spiel(20, 4, 16);
 		int hundehaufen = 0;
 		for (int s = 0; s < spiel.leseSpalten(); s++)
 		{
