@@ -520,7 +520,6 @@ public final class Spielfeld extends JFrame
 
 		final Platte platte = spiel.lesePlatte(plattenSpalte, plattenZeile);
 
-		platte.setzteIstAufgedeckt();
 		if (platte.istHundehaufenAufPlatte())
 		{
 			// falls ein Hundehaufen auf der zufälligen Startplatte ist, neue
@@ -529,6 +528,7 @@ public final class Spielfeld extends JFrame
 		}
 		else
 		{
+			platte.setzteIstAufgedeckt();
 			final JButton button = platte.leseButton();
 			final int angrenzendeHundehaufen = spiel.leseAngrenzendeHundehaufen(
 					platte.leseSpalte(), platte.leseZeile());
