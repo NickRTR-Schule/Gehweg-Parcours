@@ -192,7 +192,7 @@ public final class Spielfeld extends JFrame
 	 */
 	private void initialisieren()
 	{
-		JPanel contentPane = new JPanel();
+		JPanel contentPane = new JPanel(new BorderLayout(5, 5));
 
 		// Standard Operation beim schließen festlegen
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -205,7 +205,7 @@ public final class Spielfeld extends JFrame
 
 		panelFuerPanel.add(panel);
 
-		contentPane.add(panelFuerPanel, BorderLayout.NORTH);
+		contentPane.add(panelFuerPanel, BorderLayout.CENTER);
 
 		spielanleitungHinzufuegen(contentPane);
 
@@ -248,19 +248,19 @@ public final class Spielfeld extends JFrame
 	{
 		final JPanel anleitungsPanel = new JPanel(
 				new FlowLayout(FlowLayout.RIGHT));
-		final JPanel zwischenPanel = new JPanel(new GridLayout(2, 1));
+		final JPanel zwischenPanel = new JPanel(new BorderLayout());
 
 		vermutungenAktualisieren();
 
 		vermutungsLabel.setPreferredSize(new Dimension(150, 50));
 
-		zwischenPanel.add(vermutungsLabel);
+		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
 
 		final JLabel anleitungsLabel = new JLabel();
 		anleitungsLabel.setPreferredSize(new Dimension(150, 200));
 		anleitungsPanel.add(anleitungsLabel);
-		zwischenPanel.add(anleitungsPanel);
-		panel.add(zwischenPanel);
+		zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
+		panel.add(zwischenPanel, BorderLayout.EAST);
 	}
 
 	/**
@@ -292,6 +292,7 @@ public final class Spielfeld extends JFrame
 								fenster.dispose();
 							}
 							fenster = new Spielfeld();
+							fenster.pack();
 							fenster.setVisible(true);
 						}
 					}
