@@ -24,6 +24,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import fachkonzept.Platte;
@@ -31,7 +32,7 @@ import fachkonzept.Spiel;
 
 /**
  * GUI Klasse des Programms Gehweg-Parcours
- * 
+ *
  * @author julianschumacher
  *
  */
@@ -194,7 +195,7 @@ public final class Spielfeld extends JFrame
 		JPanel contentPane = new JPanel();
 
 		// Standard Operation beim schließen festlegen
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// Ränder festlegen
 		setBounds(100, 100, 350, 600);
@@ -238,7 +239,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Fügt die Spielanleitung an der linken Seite hinzu. Zudem wird die
 	 * Variable mit der Anzahl der nicht gesetzten hundehaufen hier hinzugefügt.
-	 * 
+	 *
 	 * @param panel
 	 *            - das Panel, zu welchem die Spielanleitung hinzugefügt werden
 	 *            soll.
@@ -473,7 +474,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Lädt ein bestimmtes Icon und gibt es als ImageIcon zurück. Als Name
 	 * reicht der Dateiname, wenn sie im Ordner assets liegen.
-	 * 
+	 *
 	 * @param name
 	 *            - der Dateiname des Bildes.
 	 * @return das Icon
@@ -504,7 +505,7 @@ public final class Spielfeld extends JFrame
 
 	/**
 	 * Testes ob das Spiel gewonnen ist oder nicht.
-	 * 
+	 *
 	 * @param spiel
 	 *            - das aktuelle Spiel
 	 */
@@ -519,7 +520,7 @@ public final class Spielfeld extends JFrame
 
 	/**
 	 * Deckt alle Platten eines Spiels auf.
-	 * 
+	 *
 	 * @param spiel
 	 *            - das aktuelle Spiel
 	 * @param kackeIcon
@@ -553,7 +554,7 @@ public final class Spielfeld extends JFrame
 	/**
 	 * Deckt eine beliebige Platte, auf welcher sich kein Hundehaufen befindet
 	 * auf.
-	 * 
+	 *
 	 * @param spiel
 	 *            - Das aktuelle Spiel
 	 */

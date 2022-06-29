@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Dieses Objekt repraesentiert das Spiel. Hier findet die Logik des Hundehaufen
  * verteilens statt. Au�erdem haelt dieses Objekt das Spielfeld und deren Ma�e.
- * 
+ *
  * @author julianschumacher
  *
  */
@@ -49,7 +49,7 @@ public final class Spiel
 
 	/**
 	 * Gibt die Platte an den angegebenen Koordinaten zurueck
-	 * 
+	 *
 	 * @param spalte
 	 *            - Die Spalte auf dem Spielfeld
 	 * @param zeile
@@ -84,7 +84,7 @@ public final class Spiel
 
 	/**
 	 * Gibt die Anzahl der angrenzenden Hundehaufen zu dieser Platte zurueck
-	 * 
+	 *
 	 * @return Ganzzahl
 	 */
 	public int leseAngrenzendeHundehaufen(int plattenSpalte, int plattenZeile)
@@ -131,7 +131,7 @@ public final class Spiel
 
 	/**
 	 * Gibt die Anzahl der Spalten zurueck
-	 * 
+	 *
 	 * @return Ganzzahl
 	 */
 	public int leseSpalten()
@@ -141,7 +141,7 @@ public final class Spiel
 
 	/**
 	 * Gibt die Anzahl der Zeilen zurueck
-	 * 
+	 *
 	 * @return Ganzzahl
 	 */
 	public int leseZeilen()
@@ -161,7 +161,7 @@ public final class Spiel
 
 	/**
 	 * Gibt zurueck ob das Spiel gewonnen ist oder nicht
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean hatGewonnen()

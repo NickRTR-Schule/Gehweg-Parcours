@@ -4,7 +4,7 @@ import javax.swing.JButton;
 
 /**
  * Dieses Objekt repraesentiert eine einzelne Platte im Spiel.
- * 
+ *
  * @author julianschumacher
  *
  */
@@ -41,7 +41,7 @@ public final class Platte
 	 * Gibt zurueck, ob sich ein Hundehaufen auf dieser Platte befindet oder
 	 * nicht. Diese Methode kann benutzt werden, um herauszufinden, ob der
 	 * Spieler verloren hat oder nicht.
-	 * 
+	 *
 	 * @return wahr oder falsch
 	 */
 	public boolean istHundehaufenAufPlatte()
@@ -51,7 +51,7 @@ public final class Platte
 
 	/**
 	 * Gibt nur die Spalte der Position der Platte zurueck
-	 * 
+	 *
 	 * @return Ganzzahl
 	 */
 	public int leseSpalte()
@@ -61,7 +61,7 @@ public final class Platte
 
 	/**
 	 * Gibt nur die Zeile der Position zurueck
-	 * 
+	 *
 	 * @return Ganzzahl
 	 */
 	public int leseZeile()
