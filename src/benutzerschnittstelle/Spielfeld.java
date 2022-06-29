@@ -424,6 +424,14 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Lädt ein bestimmtes Icon und gibt es als ImageIcon zurück. Als Name
+	 * reicht der Dateiname, wenn sie im Ordner assets liegen.
+	 * 
+	 * @param name
+	 *            - der Dateiname des Bildes.
+	 * @return das Icon
+	 */
 	private ImageIcon iconLaden(String name)
 	{
 		// Icon laden
