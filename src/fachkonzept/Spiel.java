@@ -177,4 +177,9 @@ public final class Spiel
 			return false;
 		}
 	}
+	
+	public int anzahlUebrigeVermutungen()
+	{
+		return leseVermutungen() - leseMaximaleHundehaufen();
+	}
 }
