@@ -3,6 +3,7 @@ package benutzerschnittstelle;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -38,7 +39,7 @@ public final class Spielfeld extends JFrame
 {
 
 	/**
-	 * Die SerialVersionUID Dies steht fuer "unique identification"
+	 * Die SerialVersionUID Dies steht für "unique identification"
 	 */
 	private static final long serialVersionUID = 1709700203173877403L;
 
@@ -50,6 +51,9 @@ public final class Spielfeld extends JFrame
 	private int anzahlHundehaufen;
 	private int spalten;
 	private int zeilen;
+	private Spiel spiel;
+	private int restlicheVermutungen;
+	private final JLabel vermutungsLabel = new JLabel();
 
 	/**
 	 * Launch the application.
@@ -74,13 +78,14 @@ public final class Spielfeld extends JFrame
 	{
 		// Spalten und Zeilen festlegen
 		final JPanel inputPanel = new JPanel();
-		final JTextField spaltenFeld = new JTextField("4");
-		final JTextField zeilenFeld = new JTextField("16");
+		final JTextField spaltenFeld = new JTextField("6");
+		final JTextField zeilenFeld = new JTextField("14");
 		inputPanel.setLayout(new GridLayout(4, 1));
 		inputPanel.add(new JLabel("Spalten:"));
 		inputPanel.add(spaltenFeld);
 		inputPanel.add(new JLabel("Zeilen"));
 		inputPanel.add(zeilenFeld);
+
 		boolean ersteBedingung = false;
 		do
 		{
@@ -90,6 +95,7 @@ public final class Spielfeld extends JFrame
 			{
 				final String spaltenString = spaltenFeld.getText();
 				final String zeilenString = zeilenFeld.getText();
+
 				try
 				{
 					spalten = Integer.parseInt(spaltenString);
@@ -104,8 +110,10 @@ public final class Spielfeld extends JFrame
 				{
 					JOptionPane.showMessageDialog(inputPanel,
 							"Die Anzahl der Zeilen / Spalten muss eine positive Zahl sein.");
+
 					final int antwort = JOptionPane.showConfirmDialog(fenster,
 							"Möchten Sie die Eingabe wiederholen?");
+
 					if (antwort == JOptionPane.YES_OPTION)
 					{
 						ersteBedingung = true;
@@ -120,6 +128,7 @@ public final class Spielfeld extends JFrame
 			{
 				final int schliesenAntwort = JOptionPane.showConfirmDialog(
 						inputPanel, "Wollen Sie das Spiel wirklich beenden?");
+
 				if (schliesenAntwort == JOptionPane.YES_OPTION)
 				{
 					System.exit(0);
@@ -130,6 +139,7 @@ public final class Spielfeld extends JFrame
 				}
 			}
 		} while (ersteBedingung);
+
 		panel = new JPanel(new GridLayout(zeilen, spalten));
 
 		// Hundehaufen festlegen
@@ -166,6 +176,9 @@ public final class Spielfeld extends JFrame
 			}
 		} while (bedingung);
 
+		spiel = new Spiel(anzahlHundehaufen, spalten, zeilen);
+		restlicheVermutungen = anzahlHundehaufen;
+
 		// Initialisieren
 		initialisieren();
 
@@ -178,8 +191,7 @@ public final class Spielfeld extends JFrame
 	 */
 	private void initialisieren()
 	{
-		// Panel erstellen
-		final JPanel contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 
 		// Standard Operation beim schließen festlegen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -187,11 +199,17 @@ public final class Spielfeld extends JFrame
 		// Ränder festlegen
 		setBounds(100, 100, 350, 600);
 
-		// Border Layout hinzufügen
-		contentPane.add(panel, BorderLayout.NORTH);
+		final JPanel panelFuerPanel = new JPanel(
+				new FlowLayout(FlowLayout.LEFT));
+
+		panelFuerPanel.add(panel);
+
+		contentPane.add(panelFuerPanel, BorderLayout.NORTH);
+
+		spielanleitungHinzufuegen(contentPane);
 
 		// Standard Groeße festlegen
-		panel.setPreferredSize(new Dimension(320, 560));
+		panel.setPreferredSize(new Dimension((spalten * 50), (zeilen * 40)));
 
 		// Border / Rand festlegen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -201,8 +219,7 @@ public final class Spielfeld extends JFrame
 
 		// Minimale Groeße setzen
 		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(
-				new Dimension(getBounds().width, getBounds().height + 25));
+		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -215,15 +232,43 @@ public final class Spielfeld extends JFrame
 
 		// Die Sprache auf Deutsch setzen
 		setLocale(new Locale("de"));
+
 	}
 
 	/**
-	 * Fuegt alle Objekte, wie z.B. Platten (als Buttons) zum Fenster hnzu.
+	 * Fügt die Spielanleitung an der linken Seite hinzu. Zudem wird die
+	 * Variable mit der Anzahl der nicht gesetzten hundehaufen hier hinzugefügt.
+	 * 
+	 * @param panel
+	 *            - das Panel, zu welchem die Spielanleitung hinzugefügt werden
+	 *            soll.
+	 */
+	private void spielanleitungHinzufuegen(JPanel panel)
+	{
+		final JPanel anleitungsPanel = new JPanel(
+				new FlowLayout(FlowLayout.RIGHT));
+		final JPanel zwischenPanel = new JPanel(new GridLayout(2, 1));
+
+		vermutungenAktualisieren();
+
+		vermutungsLabel.setPreferredSize(new Dimension(150, 50));
+
+		zwischenPanel.add(vermutungsLabel);
+
+		final JLabel anleitungsLabel = new JLabel();
+		anleitungsLabel.setPreferredSize(new Dimension(150, 200));
+		anleitungsPanel.add(anleitungsLabel);
+		zwischenPanel.add(anleitungsPanel);
+		panel.add(zwischenPanel);
+	}
+
+	/**
+	 * Fügt alle Objekte, wie z.B. Platten (als Buttons) zum Fenster hnzu.
 	 */
 	private void objekteHinzufuegen()
 	{
 
-		// Menue bar hinzufügen
+		// Menü bar hinzufügen
 		final JMenuBar menuBar = new JMenuBar();
 		final JMenu menu = new JMenu("Optionen");
 		final JMenuItem neustartItem = new JMenuItem(
@@ -253,9 +298,6 @@ public final class Spielfeld extends JFrame
 		menu.add(neustartItem);
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
-
-		// erstelle Spiel
-		final Spiel spiel = new Spiel(anzahlHundehaufen, spalten, zeilen);
 
 		// Start Platte aufdecken
 		startPlatteAufdecken(spiel);
@@ -328,6 +370,8 @@ public final class Spielfeld extends JFrame
 						{
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
+								restlicheVermutungen++;
+								vermutungenAktualisieren();
 								button.setIcon(zugedecktIcon);
 								spiel.entferneVermutung();
 								platte.entferneVermutung();
@@ -403,6 +447,8 @@ public final class Spielfeld extends JFrame
 											&& !platte.leseIstAufgedeckt())
 									{
 										// Vermutung durch Fahne anzeigen
+										restlicheVermutungen--;
+										vermutungenAktualisieren();
 										button.setIcon(fahneIcon);
 										spiel.fuegeVermutungHinzu();
 										platte.setzeVermutung();
@@ -534,5 +580,10 @@ public final class Spielfeld extends JFrame
 					platte.leseSpalte(), platte.leseZeile());
 			button.setText(Integer.toString(angrenzendeHundehaufen));
 		}
+	}
+
+	private void vermutungenAktualisieren()
+	{
+		vermutungsLabel.setText("🚩   " + restlicheVermutungen);
 	}
 }

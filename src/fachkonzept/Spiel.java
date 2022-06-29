@@ -177,15 +177,11 @@ public final class Spiel
 			return false;
 		}
 	}
-	
-	public int anzahlUebrigeVermutungen()
-	{
-		return leseVermutungen() - leseMaximaleHundehaufen();
-	}
-	
+
 	// Spielanleitung
-	
-	public String leseSpielAnleitung() {
+
+	public String leseSpielAnleitung()
+	{
 		return "1. Platte aufdecken: Um eine Platte aufzudecken, klicken Sie mit einem Linksklick auf die Platte.\n"
 				+ "2. Vermutung setzen: Vermuten Sie einen Hundehaufen auf einer Platte, können Sie mit Rechtsklick eine Flagge setzen.\n"
 				+ "3. Vermutung zurücknehmen: Möchten Sie eine Vermutung zurücknehmen, drücken Sie erneut mit Rechtsklick auf die Platte.";
