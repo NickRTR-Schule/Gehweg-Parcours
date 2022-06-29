@@ -261,58 +261,13 @@ public final class Spielfeld extends JFrame
 		startPlatteAufdecken(spiel);
 
 		// Kacke Icon laden
-		final InputStream kackeAlsStream = Spielfeld.class.getClassLoader()
-				.getResourceAsStream("Kacke.png");
-		final ImageIcon kackeIcon;
+		final ImageIcon kackeIcon = iconLaden("Kacke.png");
 
-		try
-		{
-			kackeIcon = new ImageIcon(kackeAlsStream.readAllBytes());
-			final Image image = kackeIcon.getImage();
-			final Image scaledInstance = image.getScaledInstance(20, 20,
-					Image.SCALE_DEFAULT);
-			kackeIcon.setImage(scaledInstance);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			return;
-		}
+		// Fahne Icon laden
+		final ImageIcon fahneIcon = iconLaden("Fahne.png");
 
-		final InputStream fahneAlsStream = Spielfeld.class.getClassLoader()
-				.getResourceAsStream("Fahne.png");
-		final ImageIcon fahneIcon;
-		try
-		{
-			fahneIcon = new ImageIcon(fahneAlsStream.readAllBytes());
-			final Image image = fahneIcon.getImage();
-			final Image scaledInstance = image.getScaledInstance(20, 20,
-					Image.SCALE_DEFAULT);
-			fahneIcon.setImage(scaledInstance);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-			return;
-		}
-
-		// Icon fuer die zugedeckten Platten
-		final InputStream zugedecktAlsStream = Spielfeld.class.getClassLoader()
-				.getResourceAsStream("zugedeckt.png");
-		final ImageIcon zugedecktIcon;
-		try
-		{
-			zugedecktIcon = new ImageIcon(zugedecktAlsStream.readAllBytes());
-			final Image image = zugedecktIcon.getImage();
-			final Image scaledInstance = image.getScaledInstance(20, 20,
-					Image.SCALE_DEFAULT);
-			zugedecktIcon.setImage(scaledInstance);
-		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
-			return;
-		}
+		// Zugdeckt Icon laden
+		final ImageIcon zugedecktIcon = iconLaden("zugedeckt.png");
 
 		// For-Schleife fuer die Zeilen
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
@@ -467,6 +422,30 @@ public final class Spielfeld extends JFrame
 				panel.add(button);
 			}
 		}
+	}
+
+	private ImageIcon iconLaden(String name)
+	{
+		// Icon laden
+		final InputStream stream = Spielfeld.class.getClassLoader()
+				.getResourceAsStream(name);
+		final ImageIcon icon;
+
+		try
+		{
+			icon = new ImageIcon(stream.readAllBytes());
+			final Image image = icon.getImage();
+			final Image scaledInstance = image.getScaledInstance(20, 20,
+					Image.SCALE_DEFAULT);
+			icon.setImage(scaledInstance);
+			return icon;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return new ImageIcon();
+		}
+
 	}
 
 	/**
