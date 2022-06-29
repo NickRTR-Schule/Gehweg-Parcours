@@ -509,7 +509,7 @@ public final class Spielfeld extends JFrame
 	 * @param spiel
 	 *            - das aktuelle Spiel
 	 */
-	public void tstGewonnen(Spiel spiel)
+	private void tstGewonnen(Spiel spiel)
 	{
 		if (spiel.hatGewonnen())
 		{
@@ -526,7 +526,7 @@ public final class Spielfeld extends JFrame
 	 * @param kackeIcon
 	 *            - Das Icon der Kacke
 	 */
-	public void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
+	private void allePlattenAufdecken(Spiel spiel, ImageIcon kackeIcon)
 	{
 		for (int zaehlerZeile = 0; zaehlerZeile < spiel
 				.leseZeilen(); zaehlerZeile++)
@@ -558,7 +558,7 @@ public final class Spielfeld extends JFrame
 	 * @param spiel
 	 *            - Das aktuelle Spiel
 	 */
-	public void startPlatteAufdecken(Spiel spiel)
+	private void startPlatteAufdecken(Spiel spiel)
 	{
 		// Nach Verteilung der Platten: Startplatte aufdecken
 
