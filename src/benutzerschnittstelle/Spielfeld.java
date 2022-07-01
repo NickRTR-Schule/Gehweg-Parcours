@@ -299,6 +299,7 @@ public final class Spielfeld extends JFrame
 			anleitungsLabel.setLineWrap(true);
 			anleitungsLabel.setWrapStyleWord(true);
 			anleitungsLabel.setPreferredSize(new Dimension(150, 320));
+			anleitungsLabel.setEditable(false);
 			anleitungsPanel.add(anleitungsLabel);
 		}
 
