@@ -31,8 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import org.w3c.dom.css.RGBColor;
-
 import fachkonzept.Platte;
 import fachkonzept.Spiel;
 
@@ -231,7 +229,7 @@ public final class Spielfeld extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// Ränder festlegen
-		setBounds(100, 100, (spalten * 50 + 200), (zeilen * 40 + 75));
+		setBounds(100, 100, (spalten * 40 + 200), (zeilen * 40 + 75));
 
 		final JPanel panelFuerPanel = new JPanel(
 				new FlowLayout(FlowLayout.LEFT));
@@ -242,13 +240,13 @@ public final class Spielfeld extends JFrame
 
 		// Minimale Groeße setzen
 		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
+		setMinimumSize(new Dimension((spalten * 40 + 200), (zeilen * 40 + 70)));
 		setPreferredSize(getMinimumSize());
 
 		spielanleitungHinzufuegen(contentPane);
 
 		// Standard Groeße festlegen
-		panel.setPreferredSize(new Dimension((spalten * 50), (zeilen * 40)));
+		panel.setPreferredSize(new Dimension((spalten * 40), (zeilen * 40)));
 
 		// Border / Rand festlegen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -363,8 +361,23 @@ public final class Spielfeld extends JFrame
 
 					}
 				});
+
+		final JMenuItem statistikItem = new JMenuItem(
+				new AbstractAction("Statistiken")
+				{
+					private static final long serialVersionUID = 1242972484744751324L;
+
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						// TODO: Aktion einfügen
+
+					}
+				});
 		menu.add(neustartItem);
 		menu.add(anleitungsItem);
+		menu.addSeparator();
+		menu.add(statistikItem);
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
 
@@ -560,7 +573,7 @@ public final class Spielfeld extends JFrame
 		{
 			icon = new ImageIcon(stream.readAllBytes());
 			final Image image = icon.getImage();
-			final Image scaledInstance = image.getScaledInstance(20, 20,
+			final Image scaledInstance = image.getScaledInstance(25, 25,
 					Image.SCALE_DEFAULT);
 			icon.setImage(scaledInstance);
 			return icon;
