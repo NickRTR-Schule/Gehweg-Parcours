@@ -332,6 +332,8 @@ public final class Spielfeld extends JFrame
 				new AbstractAction("Spielanleitung")
 				{
 
+					private static final long serialVersionUID = 5757014335354631897L;
+
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
