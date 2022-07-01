@@ -140,11 +140,9 @@ public final class Spielfeld extends JFrame
 				}
 				catch (NumberFormatException exception)
 				{
-					JOptionPane.showMessageDialog(inputPanel,
-							"Die Anzahl der Zeilen / Spalten muss eine positive Zahl sein.");
 
 					final int antwort = JOptionPane.showConfirmDialog(fenster,
-							"Möchten Sie die Eingabe wiederholen?");
+							"Die Anzahl der Zeilen / Spalten muss eine positive Zahl sein. \n Möchten Sie die Eingabe wiederholen?");
 
 					if (antwort == JOptionPane.YES_OPTION)
 					{
@@ -193,10 +191,8 @@ public final class Spielfeld extends JFrame
 			}
 			catch (NumberFormatException exception)
 			{
-				JOptionPane.showMessageDialog(fenster,
-						"Die Anzahl der Hundehaufen muss eine positive Zahl sein und darf nicht mehr als eins weniger als ihre Spielfeldgröße betragen.");
 				final int antwort = JOptionPane.showConfirmDialog(fenster,
-						"Möchten Sie die Eingabe wiederholen?");
+						"Die Anzahl der Hundehaufen muss eine positive Zahl sein und darf nicht mehr als eins weniger als ihre Spielfeldgröße betragen. \n Möchten Sie die Eingabe wiederholen?");
 				if (antwort == JOptionPane.YES_OPTION)
 				{
 					bedingung = true;
