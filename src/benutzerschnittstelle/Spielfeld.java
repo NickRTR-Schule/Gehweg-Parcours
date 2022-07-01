@@ -1,7 +1,6 @@
 package benutzerschnittstelle;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -238,6 +237,11 @@ public final class Spielfeld extends JFrame
 
 		contentPane.add(panelFuerPanel, BorderLayout.CENTER);
 
+		// Minimale Groeße setzen
+		// Das Fenster kann nicht kleiner als diese Groeße sein.
+		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
+		setPreferredSize(getMinimumSize());
+
 		spielanleitungHinzufuegen(contentPane);
 
 		// Standard Groeße festlegen
@@ -248,11 +252,6 @@ public final class Spielfeld extends JFrame
 
 		// Inhalts panel festlegen
 		setContentPane(contentPane);
-
-		// Minimale Groeße setzen
-		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
-		setPreferredSize(getMinimumSize());
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -288,17 +287,27 @@ public final class Spielfeld extends JFrame
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
 
-		final JTextArea anleitungsLabel = new JTextArea(spiel.leseSpielAnleitung());
-		anleitungsLabel.setOpaque(false);
-		anleitungsLabel.setLineWrap(true);
-		anleitungsLabel.setWrapStyleWord(true);
-		anleitungsPanel.add(anleitungsLabel);
+		if (getPreferredSize().height < 400)
+		{
+			// Nichts tun
+		}
+		else
+		{
+			final JTextArea anleitungsLabel = new JTextArea(
+					spiel.leseSpielAnleitung());
+			anleitungsLabel.setOpaque(false);
+			anleitungsLabel.setLineWrap(true);
+			anleitungsLabel.setWrapStyleWord(true);
+			anleitungsLabel.setPreferredSize(new Dimension(150, 400));
+			anleitungsPanel.add(anleitungsLabel);
+		}
+
+		final JPanel spacer = new JPanel();
 		zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
+		spacer.setPreferredSize(new Dimension(10, 10));
+		zwischenPanel.add(spacer, BorderLayout.EAST);
+
 		panel.add(zwischenPanel, BorderLayout.EAST);
-		
-		
-		
-		
 	}
 
 	/**
@@ -639,6 +648,9 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Aktualisiert das Label mit der Vermutung
+	 */
 	private void vermutungenAktualisieren()
 	{
 		vermutungsLabel.setText("🚩   " + restlicheVermutungen);
