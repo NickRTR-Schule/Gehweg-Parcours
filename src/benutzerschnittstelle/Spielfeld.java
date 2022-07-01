@@ -335,7 +335,23 @@ public final class Spielfeld extends JFrame
 						}
 					}
 				});
+
+		final JMenuItem anleitungsItem = new JMenuItem(
+				new AbstractAction("Spielanleitung")
+				{
+
+					private static final long serialVersionUID = 5757014335354631897L;
+
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						JOptionPane.showMessageDialog(null,
+								spiel.leseSpielAnleitung());
+
+					}
+				});
 		menu.add(neustartItem);
+		menu.add(anleitungsItem);
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
 
