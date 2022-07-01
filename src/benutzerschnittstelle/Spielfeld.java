@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -81,6 +83,33 @@ public final class Spielfeld extends JFrame
 		final JPanel inputPanel = new JPanel();
 		final JTextField spaltenFeld = new JTextField("6");
 		final JTextField zeilenFeld = new JTextField("14");
+		spaltenFeld.addFocusListener(new FocusListener()
+		{
+			@Override
+			public void focusLost(FocusEvent e)
+			{
+			}
+
+			@Override
+			public void focusGained(FocusEvent e)
+			{
+				spaltenFeld.selectAll();
+			}
+		});
+
+		zeilenFeld.addFocusListener(new FocusListener()
+		{
+			@Override
+			public void focusLost(FocusEvent e)
+			{
+			}
+
+			@Override
+			public void focusGained(FocusEvent e)
+			{
+				zeilenFeld.selectAll();
+			}
+		});
 		inputPanel.setLayout(new GridLayout(4, 1));
 		inputPanel.add(new JLabel("Spalten:"));
 		inputPanel.add(spaltenFeld);
@@ -221,6 +250,7 @@ public final class Spielfeld extends JFrame
 		// Minimale Groeße setzen
 		// Das Fenster kann nicht kleiner als diese Groeße sein.
 		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
+		setPreferredSize(getMinimumSize());
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -256,7 +286,7 @@ public final class Spielfeld extends JFrame
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
 
-		final JLabel anleitungsLabel = new JLabel();
+		final JLabel anleitungsLabel = new JLabel(spiel.leseSpielAnleitung());
 		anleitungsLabel.setPreferredSize(new Dimension(150, 200));
 		anleitungsPanel.add(anleitungsLabel);
 		zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
