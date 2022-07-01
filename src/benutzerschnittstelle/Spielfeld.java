@@ -288,14 +288,14 @@ public final class Spielfeld extends JFrame
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
 
-//		final JLabel anleitungsLabel = new JLabel(spiel.leseSpielAnleitung());
-//		anleitungsLabel.setPreferredSize(new Dimension(150, 200));
 		final JTextArea anleitungsLabel = new JTextArea(spiel.leseSpielAnleitung());
 		anleitungsLabel.setOpaque(false);
-		anleitungsLabel.setMaximumSize(new Dimension(2, 200));
+		anleitungsLabel.setLineWrap(true);
+		anleitungsLabel.setWrapStyleWord(true);
 		anleitungsPanel.add(anleitungsLabel);
 		zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
-		panel.add(zwischenPanel, BorderLayout.EAST); 
+		panel.add(zwischenPanel, BorderLayout.EAST);
+		
 		
 		
 		
