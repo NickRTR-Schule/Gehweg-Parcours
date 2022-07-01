@@ -237,6 +237,11 @@ public final class Spielfeld extends JFrame
 
 		contentPane.add(panelFuerPanel, BorderLayout.CENTER);
 
+		// Minimale Groeße setzen
+		// Das Fenster kann nicht kleiner als diese Groeße sein.
+		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
+		setPreferredSize(getMinimumSize());
+
 		spielanleitungHinzufuegen(contentPane);
 
 		// Standard Groeße festlegen
@@ -247,11 +252,6 @@ public final class Spielfeld extends JFrame
 
 		// Inhalts panel festlegen
 		setContentPane(contentPane);
-
-		// Minimale Groeße setzen
-		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(new Dimension((spalten * 50 + 200), (zeilen * 40 + 70)));
-		setPreferredSize(getMinimumSize());
 
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
@@ -286,9 +286,11 @@ public final class Spielfeld extends JFrame
 		vermutungsLabel.setPreferredSize(new Dimension(150, 50));
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
+		System.out.println(getPreferredSize());
 
-		if (getPreferredSize().height > 400)
+		if (getPreferredSize().height < 400)
 		{
+			// Nichts tun
 		}
 		else
 		{
@@ -299,14 +301,14 @@ public final class Spielfeld extends JFrame
 			anleitungsLabel.setWrapStyleWord(true);
 			anleitungsLabel.setPreferredSize(new Dimension(150, 400));
 			anleitungsPanel.add(anleitungsLabel);
-
-			final JPanel spacer = new JPanel();
-			zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
-
-			spacer.setPreferredSize(new Dimension(10, 10));
-			zwischenPanel.add(spacer, BorderLayout.EAST);
-			panel.add(zwischenPanel, BorderLayout.EAST);
 		}
+
+		final JPanel spacer = new JPanel();
+		zwischenPanel.add(anleitungsPanel, BorderLayout.CENTER);
+		spacer.setPreferredSize(new Dimension(10, 10));
+		zwischenPanel.add(spacer, BorderLayout.EAST);
+
+		panel.add(zwischenPanel, BorderLayout.EAST);
 	}
 
 	/**
