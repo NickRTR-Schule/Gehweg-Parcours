@@ -327,7 +327,21 @@ public final class Spielfeld extends JFrame
 						}
 					}
 				});
+
+		final JMenuItem anleitungsItem = new JMenuItem(
+				new AbstractAction("Spielanleitung")
+				{
+
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						JOptionPane.showMessageDialog(null,
+								spiel.leseSpielAnleitung());
+
+					}
+				});
 		menu.add(neustartItem);
+		menu.add(anleitungsItem);
 		menuBar.add(menu);
 		setJMenuBar(menuBar);
 
