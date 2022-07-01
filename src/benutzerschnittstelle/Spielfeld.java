@@ -287,7 +287,7 @@ public final class Spielfeld extends JFrame
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
 
-		if (getPreferredSize().height < 400)
+		if (getPreferredSize().height < 470)
 		{
 			// Nichts tun
 		}
@@ -298,7 +298,7 @@ public final class Spielfeld extends JFrame
 			anleitungsLabel.setOpaque(false);
 			anleitungsLabel.setLineWrap(true);
 			anleitungsLabel.setWrapStyleWord(true);
-			anleitungsLabel.setPreferredSize(new Dimension(150, 400));
+			anleitungsLabel.setPreferredSize(new Dimension(150, 320));
 			anleitungsPanel.add(anleitungsLabel);
 		}
 
@@ -371,7 +371,7 @@ public final class Spielfeld extends JFrame
 		final ImageIcon kackeIcon = iconLaden("Kacke.png");
 
 		// Fahne Icon laden
-		
+
 		final ImageIcon fahneIcon = iconLaden("Fahne.png");
 
 		// Zugdeckt Icon laden
