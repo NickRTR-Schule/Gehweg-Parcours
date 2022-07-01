@@ -362,6 +362,7 @@ public final class Spielfeld extends JFrame
 		final ImageIcon kackeIcon = iconLaden("Kacke.png");
 
 		// Fahne Icon laden
+		
 		final ImageIcon fahneIcon = iconLaden("Fahne.png");
 
 		// Zugdeckt Icon laden
