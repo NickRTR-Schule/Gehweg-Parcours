@@ -257,7 +257,7 @@ public final class Spielfeld extends JFrame
 		setTitle("Gehweg-Parcours");
 
 		// Moeglichkeit das Fenster zu skalieren aktivieren
-		setResizable(true);
+		setResizable(false);
 
 		// Das Fenster selbst aktivieren
 		setEnabled(true);
