@@ -286,7 +286,6 @@ public final class Spielfeld extends JFrame
 		vermutungsLabel.setPreferredSize(new Dimension(150, 50));
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
-		System.out.println(getPreferredSize());
 
 		if (getPreferredSize().height < 400)
 		{
@@ -648,6 +647,9 @@ public final class Spielfeld extends JFrame
 		}
 	}
 
+	/**
+	 * Aktualisiert das Label mit der Vermutung
+	 */
 	private void vermutungenAktualisieren()
 	{
 		vermutungsLabel.setText("🚩   " + restlicheVermutungen);
