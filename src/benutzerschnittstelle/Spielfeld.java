@@ -176,30 +176,58 @@ public final class Spielfeld extends JFrame
 		boolean bedingung = false;
 		do
 		{
-			final String anzahlHundehaufenString = JOptionPane.showInputDialog(
-					"Wie viele Hundehaufen möchten Sie auf dem Spielfeld haben?",
-					20);
-			try
+
+			final JPanel hundehaufenPanel = new JPanel(new GridLayout(2, 1));
+			final JTextArea schwierigkeiten = new JTextArea(
+					schwierigkeitsVorschläge());
+			schwierigkeiten.setOpaque(false);
+			schwierigkeiten.setEditable(false);
+			hundehaufenPanel.add(schwierigkeiten);
+			final JTextField hundehaufenTextFeld = new JTextField("20");
+			hundehaufenTextFeld.addFocusListener(new FocusListener()
 			{
-				anzahlHundehaufen = Integer.parseInt(anzahlHundehaufenString);
-				if (anzahlHundehaufen < 1
-						|| anzahlHundehaufen > (spalten * zeilen - 1))
+				@Override
+				public void focusLost(FocusEvent e)
 				{
-					throw new NumberFormatException();
 				}
-				bedingung = false;
-			}
-			catch (NumberFormatException exception)
+
+				@Override
+				public void focusGained(FocusEvent e)
+				{
+					hundehaufenTextFeld.selectAll();
+				}
+			});
+			hundehaufenPanel.add(hundehaufenTextFeld);
+
+			final int hundehaufenAntwort = JOptionPane
+					.showConfirmDialog(fenster, hundehaufenPanel);
+			if (hundehaufenAntwort == JOptionPane.YES_OPTION)
 			{
-				final int antwort = JOptionPane.showConfirmDialog(fenster,
-						"Die Anzahl der Hundehaufen muss eine positive Zahl sein und darf nicht mehr als eins weniger als ihre Spielfeldgröße betragen. \n Möchten Sie die Eingabe wiederholen?");
-				if (antwort == JOptionPane.YES_OPTION)
+				final String anzahlHundehaufenString = hundehaufenTextFeld
+						.getText();
+				try
 				{
-					bedingung = true;
+					anzahlHundehaufen = Integer
+							.parseInt(anzahlHundehaufenString);
+					if (anzahlHundehaufen < 1
+							|| anzahlHundehaufen > (spalten * zeilen - 1))
+					{
+						throw new NumberFormatException();
+					}
+					bedingung = false;
 				}
-				else
+				catch (NumberFormatException exception)
 				{
-					System.exit(0);
+					final int antwort = JOptionPane.showConfirmDialog(fenster,
+							"Die Anzahl der Hundehaufen muss eine positive Zahl sein und darf nicht mehr als eins weniger als ihre Spielfeldgröße betragen. \n Möchten Sie die Eingabe wiederholen?");
+					if (antwort == JOptionPane.YES_OPTION)
+					{
+						bedingung = true;
+					}
+					else
+					{
+						System.exit(0);
+					}
 				}
 			}
 		} while (bedingung);
@@ -668,5 +696,12 @@ public final class Spielfeld extends JFrame
 	private void vermutungenAktualisieren()
 	{
 		vermutungsLabel.setText("🚩   " + restlicheVermutungen);
+	}
+
+	private String schwierigkeitsVorschläge()
+	{
+		final int anzahl = spalten * zeilen;
+		return "Leicht: " + anzahl / 6 + "\nMittel: " + anzahl / 4.2
+				+ "\nSchwer: " + anzahl / 3.5;
 	}
 }
