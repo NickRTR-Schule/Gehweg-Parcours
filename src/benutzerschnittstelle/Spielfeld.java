@@ -1,6 +1,7 @@
 package benutzerschnittstelle;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -29,6 +30,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+
+import org.w3c.dom.css.RGBColor;
 
 import fachkonzept.Platte;
 import fachkonzept.Spiel;
@@ -394,6 +397,7 @@ public final class Spielfeld extends JFrame
 				// Knopf erstellen
 				final JButton button = platte.leseButton();
 				button.setPreferredSize(new Dimension(20, 20));
+				button.setBackground(Color.white);
 
 				// Icon festlegen
 				if (!platte.leseIstAufgedeckt())
