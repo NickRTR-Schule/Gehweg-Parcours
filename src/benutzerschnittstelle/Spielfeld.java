@@ -198,7 +198,7 @@ public final class Spielfeld extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// Ränder festlegen
-		setBounds(100, 100, 350, 600);
+		setBounds(100, 100, (spalten * 50 + 200), (zeilen * 40 + 75));
 
 		final JPanel panelFuerPanel = new JPanel(
 				new FlowLayout(FlowLayout.LEFT));
