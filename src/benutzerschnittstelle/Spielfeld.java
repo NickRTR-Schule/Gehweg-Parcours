@@ -281,7 +281,7 @@ public final class Spielfeld extends JFrame
 		// Titel des Fensters festlegen
 		setTitle("Gehweg-Parcours");
 
-		// Moeglichkeit das Fenster zu skalieren aktivieren
+		// Moeglichkeit das Fenster zu skalieren deaktivieren
 		setResizable(false);
 
 		// Das Fenster selbst aktivieren
