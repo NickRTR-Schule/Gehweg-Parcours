@@ -12,6 +12,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -33,6 +35,8 @@ import javax.swing.border.EmptyBorder;
 
 import fachkonzept.Platte;
 import fachkonzept.Spiel;
+import fachkonzept.Statistik;
+import io.Dateisystem;
 
 /**
  * GUI Klasse des Programms Gehweg-Parcours
@@ -59,6 +63,11 @@ public final class Spielfeld extends JFrame
 	private Spiel spiel;
 	private int restlicheVermutungen;
 	private final JLabel vermutungsLabel = new JLabel();
+	private int anzahlRichtigeFlaggen;
+	private int anzahlFalscheFlaggen;
+	private int vermutungenZurueckgenommen;
+	private double spielzeit;
+	private int anzahlAufgedecktePlatten;
 
 	/**
 	 * Launch the application.
@@ -81,6 +90,48 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
+		addWindowListener(new WindowListener()
+		{
+
+			@Override
+			public void windowOpened(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
+						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
+						vermutungenZurueckgenommen, spielzeit);
+				Dateisystem.speichereStatistik(statistik);
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e)
+			{
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e)
+			{
+			}
+		});
 		// Spalten und Zeilen festlegen
 		final JPanel inputPanel = new JPanel();
 		final JTextField spaltenFeld = new JTextField("6");
@@ -289,7 +340,6 @@ public final class Spielfeld extends JFrame
 
 		// Die Sprache auf Deutsch setzen
 		setLocale(new Locale("de"));
-
 	}
 
 	/**
@@ -453,6 +503,7 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void mouseReleased(MouseEvent e)
 					{
+						mouseClicked(e);
 					}
 
 					@Override
@@ -479,6 +530,15 @@ public final class Spielfeld extends JFrame
 							if (mausKlick.getButton() == MouseEvent.BUTTON3)
 							{
 								restlicheVermutungen++;
+								vermutungenZurueckgenommen++;
+								if (platte.istHundehaufenAufPlatte())
+								{
+									anzahlRichtigeFlaggen--;
+								}
+								else
+								{
+									anzahlFalscheFlaggen--;
+								}
 								vermutungenAktualisieren();
 								button.setIcon(zugedecktIcon);
 								spiel.entferneVermutung();
@@ -496,6 +556,7 @@ public final class Spielfeld extends JFrame
 								}
 								else
 								{
+									anzahlAufgedecktePlatten++;
 									platte.setzteIstAufgedeckt();
 									if (platte.istHundehaufenAufPlatte())
 									{
@@ -556,6 +617,14 @@ public final class Spielfeld extends JFrame
 									{
 										// Vermutung durch Fahne anzeigen
 										restlicheVermutungen--;
+										if (platte.istHundehaufenAufPlatte())
+										{
+											anzahlRichtigeFlaggen++;
+										}
+										else
+										{
+											anzahlFalscheFlaggen++;
+										}
 										vermutungenAktualisieren();
 										button.setIcon(fahneIcon);
 										spiel.fuegeVermutungHinzu();
