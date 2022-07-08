@@ -90,6 +90,7 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
+		Dateisystem.initialisiere();
 		addWindowListener(new WindowListener()
 		{
 
