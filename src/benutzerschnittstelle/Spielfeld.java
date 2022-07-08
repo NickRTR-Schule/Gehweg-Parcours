@@ -264,7 +264,7 @@ public final class Spielfeld extends JFrame
 
 		// Minimale Groeße setzen
 		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(new Dimension((spalten * 40 + 210), (zeilen * 40 + 70)));
+		setMinimumSize(new Dimension((spalten * 40 + 250), (zeilen * 40 + 70)));
 		setPreferredSize(getMinimumSize());
 
 		spielanleitungHinzufuegen(contentPane);
