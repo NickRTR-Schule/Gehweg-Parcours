@@ -1,5 +1,6 @@
 package fachkonzept;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,6 +12,11 @@ import java.util.Date;
  */
 public final class Statistik
 {
+	/**
+	 * Enthält alle Statistiken des Nutzers
+	 */
+	static public final ArrayList<Statistik> statistiken = new ArrayList<Statistik>();
+
 	private final double durchschnittlicheDenkzeit;
 	private final int anzahlRichtigeFlaggen;
 	private final int anzahlFalscheFlaggen;
