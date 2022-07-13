@@ -28,6 +28,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -446,8 +447,7 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						// TODO: Aktion einfügen
-
+						zeigeStatistiken();
 					}
 				});
 		menu.add(neustartItem);
@@ -774,5 +774,37 @@ public final class Spielfeld extends JFrame
 		final int anzahl = spalten * zeilen;
 		return "Leicht: " + anzahl / 6 + "\nMittel: " + anzahl / 4.2
 				+ "\nSchwer: " + anzahl / 3.5;
+	}
+
+	private void zeigeStatistik()
+	{
+
+	}
+
+	private void zeigeStatistiken()
+	{
+		final JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2, 1));
+		for (int i = 0; i < Statistik.statistiken.size(); i++)
+		{
+			Statistik stat = Statistik.statistiken.get(i);
+
+			panel.add(new JLabel("Gespielt am: " + stat.leseDatum()));
+			panel.add(new JLabel("Anzahl richtige Flaggen: "
+					+ stat.leseAnzahlRichtigeFlaggen()));
+			panel.add(new JLabel("Anzahl falsche Flaggen: "
+					+ stat.leseAnzahlFalscheFlaggen()));
+			panel.add(
+					new JLabel("Flaggen gesamt: " + stat.leseFlaggenGesamt()));
+			panel.add(new JLabel("Zurückgenommene Vermutungen: "
+					+ stat.leseVermutungenZurueckgenommen()));
+			panel.add(new JLabel("Aufgedeckte Platten: "
+					+ stat.leseAnzahlAufgedecktePlatten()));
+			panel.add(new JLabel("Durschnittliche Denkzeit: "
+					+ stat.leseDurchschnittlicheDenkzeit()));
+			panel.add(new JLabel("Spielzeit: " + stat.leseSpielzeit()));
+		}
+		final JScrollPane statistikPanel = new JScrollPane(panel);
+		JOptionPane.showMessageDialog(null, statistikPanel);
 	}
 }
