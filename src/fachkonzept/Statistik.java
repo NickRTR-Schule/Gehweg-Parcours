@@ -1,5 +1,6 @@
 package fachkonzept;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,12 +11,14 @@ import java.util.Date;
  * @author julianschumacher
  *
  */
-public final class Statistik
+public final class Statistik implements Serializable
 {
+	private static final long serialVersionUID = -1470311292685669309L;
+
 	/**
 	 * Enthält alle Statistiken des Nutzers
 	 */
-	static public final ArrayList<Statistik> statistiken = new ArrayList<Statistik>();
+	static public ArrayList<Statistik> statistiken = new ArrayList<Statistik>();
 
 	private final double durchschnittlicheDenkzeit;
 	private final int anzahlRichtigeFlaggen;

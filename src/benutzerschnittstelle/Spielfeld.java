@@ -8,12 +8,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -86,7 +86,6 @@ public final class Spielfeld extends JFrame
 				timerStart = System.currentTimeMillis();
 			}
 		});
-
 	}
 
 	/**
@@ -94,50 +93,26 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
-		Dateisystem.initialisiere();
 		Dateisystem.ladeStatistik();
-		addWindowListener(new WindowListener()
+		this.addComponentListener(new ComponentAdapter()
 		{
-
 			@Override
-			public void windowOpened(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e)
+			public void componentHidden(ComponentEvent e)
 			{
 				timerEnde = System.currentTimeMillis();
 				spielzeit = timerEnde - timerStart;
 				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
 						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
 						vermutungenZurueckgenommen, spielzeit);
-				Dateisystem.speichereStatistik(statistik);
+				Statistik.statistiken.add(statistik);
+				Dateisystem.speichereStatistik();
 			}
 
 			@Override
-			public void windowClosed(WindowEvent e)
+			public void componentShown(ComponentEvent e)
 			{
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e)
-			{
+				// TODO Auto-generated method stub
+				super.componentShown(e);
 			}
 		});
 		// Spalten und Zeilen festlegen
@@ -501,32 +476,11 @@ public final class Spielfeld extends JFrame
 					button.setIcon(zugedecktIcon);
 				}
 				// MouseListener hinzufuegen
-				button.addMouseListener(new MouseListener()
+				button.addMouseListener(new MouseAdapter()
 				{
 					// Diese Methoden sind irrelevant fuer dieses Programm.
 					// Somit sind sie nicht beschrieben und koennen ignoriert
 					// werden
-
-					@Override
-					public void mouseReleased(MouseEvent e)
-					{
-						mouseClicked(e);
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e)
-					{
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e)
-					{
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e)
-					{
-					}
 
 					@Override
 					public void mouseClicked(MouseEvent mausKlick)
@@ -781,15 +735,10 @@ public final class Spielfeld extends JFrame
 				+ "\nSchwer: " + anzahl / 3.5;
 	}
 
-	private void zeigeStatistik()
-	{
-
-	}
-
 	private void zeigeStatistiken()
 	{
 		final JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(2, 1));
+		panel.setLayout(new GridLayout(1, Statistik.statistiken.size() * 8));
 		for (int i = 0; i < Statistik.statistiken.size(); i++)
 		{
 			Statistik stat = Statistik.statistiken.get(i);
