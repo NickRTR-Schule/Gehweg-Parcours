@@ -123,7 +123,7 @@ public final class Spielfeld extends JFrame
 			public void windowClosing(WindowEvent e)
 			{
 				timerEnde = System.currentTimeMillis();
-				spielzeit= timerEnde - timerStart;
+				spielzeit = timerEnde - timerStart;
 				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
 						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
 						vermutungenZurueckgenommen, spielzeit);
