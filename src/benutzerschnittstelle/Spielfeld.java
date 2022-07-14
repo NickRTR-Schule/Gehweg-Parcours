@@ -354,22 +354,8 @@ public final class Spielfeld extends JFrame
 										"Möchten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
-							timerEnde = System.currentTimeMillis();
-							spielzeit = timerEnde - timerStart;
-							final Statistik statistik = new Statistik(
-									anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
-									anzahlAufgedecktePlatten,
-									vermutungenZurueckgenommen, spielzeit);
-							Statistik.statistiken.add(statistik);
-							Dateisystem.speichereStatistik();
-							if (fenster != null)
-							{
-								fenster.setVisible(false);
-								fenster.dispose();
-							}
-							fenster = new Spielfeld();
-							fenster.pack();
-							fenster.setVisible(true);
+							speichere();
+							neustarten();
 						}
 					}
 				});
@@ -502,44 +488,12 @@ public final class Spielfeld extends JFrame
 										switch (optiongewaehlt)
 										{
 											case JOptionPane.YES_OPTION:
-												timerEnde = System
-														.currentTimeMillis();
-												spielzeit = timerEnde
-														- timerStart;
-												statistik = new Statistik(
-														anzahlRichtigeFlaggen,
-														anzahlFalscheFlaggen,
-														anzahlAufgedecktePlatten,
-														vermutungenZurueckgenommen,
-														spielzeit);
-												Statistik.statistiken
-														.add(statistik);
-												Dateisystem
-														.speichereStatistik();
-												if (fenster != null)
-												{
-													fenster.setVisible(false);
-													fenster.dispose();
-												}
-												fenster = new Spielfeld();
-												fenster.setVisible(true);
+												speichere();
+												neustarten();
 												break;
 
 											case JOptionPane.NO_OPTION:
-												timerEnde = System
-														.currentTimeMillis();
-												spielzeit = timerEnde
-														- timerStart;
-												statistik = new Statistik(
-														anzahlRichtigeFlaggen,
-														anzahlFalscheFlaggen,
-														anzahlAufgedecktePlatten,
-														vermutungenZurueckgenommen,
-														spielzeit);
-												Statistik.statistiken
-														.add(statistik);
-												Dateisystem
-														.speichereStatistik();
+												speichere();
 												System.exit(0);
 												break;
 
@@ -655,33 +609,13 @@ public final class Spielfeld extends JFrame
 			{
 				case JOptionPane.YES_OPTION:
 				{
-					timerEnde = System.currentTimeMillis();
-					spielzeit = timerEnde - timerStart;
-					final Statistik statistik = new Statistik(
-							anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
-							anzahlAufgedecktePlatten,
-							vermutungenZurueckgenommen, spielzeit);
-					Statistik.statistiken.add(statistik);
-					Dateisystem.speichereStatistik();
-					if (fenster != null)
-					{
-						fenster.setVisible(false);
-						fenster.dispose();
-					}
-					fenster = new Spielfeld();
-					fenster.setVisible(true);
+					speichere();
+					neustarten();
 					break;
 
 				}
 				case JOptionPane.NO_OPTION:
-					timerEnde = System.currentTimeMillis();
-					spielzeit = timerEnde - timerStart;
-					final Statistik statistik = new Statistik(
-							anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
-							anzahlAufgedecktePlatten,
-							vermutungenZurueckgenommen, spielzeit);
-					Statistik.statistiken.add(statistik);
-					Dateisystem.speichereStatistik();
+					speichere();
 					System.exit(0);
 					break;
 				default:
@@ -798,5 +732,27 @@ public final class Spielfeld extends JFrame
 		}
 		final JScrollPane statistikPanel = new JScrollPane(panel);
 		JOptionPane.showMessageDialog(null, statistikPanel);
+	}
+
+	private void speichere()
+	{
+		timerEnde = System.currentTimeMillis();
+		spielzeit = timerEnde - timerStart;
+		final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
+				anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
+				vermutungenZurueckgenommen, spielzeit);
+		Statistik.statistiken.add(statistik);
+		Dateisystem.speichereStatistik();
+	}
+
+	private void neustarten()
+	{
+		if (fenster != null)
+		{
+			fenster.setVisible(false);
+			fenster.dispose();
+		}
+		fenster = new Spielfeld();
+		fenster.setVisible(true);
 	}
 }
