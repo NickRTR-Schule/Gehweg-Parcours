@@ -69,6 +69,8 @@ public final class Spielfeld extends JFrame
 	private int vermutungenZurueckgenommen;
 	private double spielzeit;
 	private int anzahlAufgedecktePlatten;
+	private static long timerStart;
+	private static long timerEnde;
 
 	/**
 	 * Launch the application.
@@ -81,6 +83,7 @@ public final class Spielfeld extends JFrame
 			public void run()
 			{
 				fenster.setVisible(true);
+				timerStart = System.currentTimeMillis();
 			}
 		});
 
@@ -119,6 +122,8 @@ public final class Spielfeld extends JFrame
 			@Override
 			public void windowClosing(WindowEvent e)
 			{
+				timerEnde = System.currentTimeMillis();
+				spielzeit= timerEnde - timerStart;
 				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
 						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
 						vermutungenZurueckgenommen, spielzeit);
