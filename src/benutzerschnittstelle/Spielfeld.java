@@ -8,10 +8,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -94,38 +92,12 @@ public final class Spielfeld extends JFrame
 	public Spielfeld()
 	{
 		Dateisystem.ladeStatistik();
-		this.addComponentListener(new ComponentAdapter()
-		{
-			@Override
-			public void componentHidden(ComponentEvent e)
-			{
-				timerEnde = System.currentTimeMillis();
-				spielzeit = timerEnde - timerStart;
-				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
-						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
-						vermutungenZurueckgenommen, spielzeit);
-				Statistik.statistiken.add(statistik);
-				Dateisystem.speichereStatistik();
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e)
-			{
-				// TODO Auto-generated method stub
-				super.componentShown(e);
-			}
-		});
 		// Spalten und Zeilen festlegen
 		final JPanel inputPanel = new JPanel();
 		final JTextField spaltenFeld = new JTextField("6");
 		final JTextField zeilenFeld = new JTextField("14");
-		spaltenFeld.addFocusListener(new FocusListener()
+		spaltenFeld.addFocusListener(new FocusAdapter()
 		{
-			@Override
-			public void focusLost(FocusEvent e)
-			{
-			}
-
 			@Override
 			public void focusGained(FocusEvent e)
 			{
@@ -133,13 +105,8 @@ public final class Spielfeld extends JFrame
 			}
 		});
 
-		zeilenFeld.addFocusListener(new FocusListener()
+		zeilenFeld.addFocusListener(new FocusAdapter()
 		{
-			@Override
-			public void focusLost(FocusEvent e)
-			{
-			}
-
 			@Override
 			public void focusGained(FocusEvent e)
 			{
@@ -218,13 +185,8 @@ public final class Spielfeld extends JFrame
 			schwierigkeiten.setEditable(false);
 			hundehaufenPanel.add(schwierigkeiten);
 			final JTextField hundehaufenTextFeld = new JTextField("20");
-			hundehaufenTextFeld.addFocusListener(new FocusListener()
+			hundehaufenTextFeld.addFocusListener(new FocusAdapter()
 			{
-				@Override
-				public void focusLost(FocusEvent e)
-				{
-				}
-
 				@Override
 				public void focusGained(FocusEvent e)
 				{
@@ -392,6 +354,14 @@ public final class Spielfeld extends JFrame
 										"Möchten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
+							timerEnde = System.currentTimeMillis();
+							spielzeit = timerEnde - timerStart;
+							final Statistik statistik = new Statistik(
+									anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
+									anzahlAufgedecktePlatten,
+									vermutungenZurueckgenommen, spielzeit);
+							Statistik.statistiken.add(statistik);
+							Dateisystem.speichereStatistik();
 							if (fenster != null)
 							{
 								fenster.setVisible(false);
@@ -528,9 +498,24 @@ public final class Spielfeld extends JFrame
 												.showConfirmDialog(null, spiel
 														.verloren() + "\n"
 														+ "Möchten Sie das Spiel neustarten?");
+										final Statistik statistik;
 										switch (optiongewaehlt)
 										{
 											case JOptionPane.YES_OPTION:
+												timerEnde = System
+														.currentTimeMillis();
+												spielzeit = timerEnde
+														- timerStart;
+												statistik = new Statistik(
+														anzahlRichtigeFlaggen,
+														anzahlFalscheFlaggen,
+														anzahlAufgedecktePlatten,
+														vermutungenZurueckgenommen,
+														spielzeit);
+												Statistik.statistiken
+														.add(statistik);
+												Dateisystem
+														.speichereStatistik();
 												if (fenster != null)
 												{
 													fenster.setVisible(false);
@@ -541,6 +526,20 @@ public final class Spielfeld extends JFrame
 												break;
 
 											case JOptionPane.NO_OPTION:
+												timerEnde = System
+														.currentTimeMillis();
+												spielzeit = timerEnde
+														- timerStart;
+												statistik = new Statistik(
+														anzahlRichtigeFlaggen,
+														anzahlFalscheFlaggen,
+														anzahlAufgedecktePlatten,
+														vermutungenZurueckgenommen,
+														spielzeit);
+												Statistik.statistiken
+														.add(statistik);
+												Dateisystem
+														.speichereStatistik();
 												System.exit(0);
 												break;
 
@@ -650,8 +649,44 @@ public final class Spielfeld extends JFrame
 	{
 		if (spiel.hatGewonnen())
 		{
-			JOptionPane.showConfirmDialog(null,
+			final int option = JOptionPane.showConfirmDialog(null,
 					"Herzlichen Glückwunsch! \n Möchten Sie nochmal spielen?");
+			switch (option)
+			{
+				case JOptionPane.YES_OPTION:
+				{
+					timerEnde = System.currentTimeMillis();
+					spielzeit = timerEnde - timerStart;
+					final Statistik statistik = new Statistik(
+							anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
+							anzahlAufgedecktePlatten,
+							vermutungenZurueckgenommen, spielzeit);
+					Statistik.statistiken.add(statistik);
+					Dateisystem.speichereStatistik();
+					if (fenster != null)
+					{
+						fenster.setVisible(false);
+						fenster.dispose();
+					}
+					fenster = new Spielfeld();
+					fenster.setVisible(true);
+					break;
+
+				}
+				case JOptionPane.NO_OPTION:
+					timerEnde = System.currentTimeMillis();
+					spielzeit = timerEnde - timerStart;
+					final Statistik statistik = new Statistik(
+							anzahlRichtigeFlaggen, anzahlFalscheFlaggen,
+							anzahlAufgedecktePlatten,
+							vermutungenZurueckgenommen, spielzeit);
+					Statistik.statistiken.add(statistik);
+					Dateisystem.speichereStatistik();
+					System.exit(0);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
@@ -735,10 +770,13 @@ public final class Spielfeld extends JFrame
 				+ "\nSchwer: " + anzahl / 3.5;
 	}
 
+	/**
+	 * Zeigt eine Liste aller Spielstatistiken an.
+	 */
 	private void zeigeStatistiken()
 	{
 		final JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, Statistik.statistiken.size() * 8));
+		panel.setLayout(new GridLayout(Statistik.statistiken.size() * 8, 1));
 		for (int i = 0; i < Statistik.statistiken.size(); i++)
 		{
 			Statistik stat = Statistik.statistiken.get(i);
