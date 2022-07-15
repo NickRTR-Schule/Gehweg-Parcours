@@ -1,5 +1,14 @@
 # Gehweg-Parcours
+
 Klasse 11 Software Abschlussprojekt - Scrum Projektmanagement
+
+## Scrum Definition
+
+Scrum ist eine Projektmanagement Methode, bei der Backlog items zyklisch abgearbeitet werden und immer eine funktionierende Version des Projekts verfügbar ist. Ein Einsatzzweck für Scrum ist die Entwicklung von Websites.
+
+### Definitionen verfassen
+
+Begriff := Oberbegriff, spezifizierende Eingrenzung, ggf. Beispiel
 
 ## Product Goal
 
