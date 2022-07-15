@@ -2,6 +2,8 @@
 
 [Spielanleitung](https://github.com/NickRTR-Schule/Gehweg-Pacours/wiki)
 
+Nach 2 Monaten Entwicklungszeit sind wir glücklich bekannt zu geben, dass wir unser gesetztes Ziel erreicht und übertroffen haben. Das Team hat gut zusammengearbeitet wodurch wir schnell und stetig vorangekommen sind.
+
 --- 
 
 ## Features:
