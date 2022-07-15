@@ -47,7 +47,7 @@ public final class Dateisystem
 					outputStream);
 
 			objectStream.writeObject(Statistik.statistiken);
-
+			
 			// for (Statistik statistik : Statistik.statistiken)
 			// {
 			// objectStream.writeObject(statistik.leseAnzahlRichtigeFlaggen());

@@ -1,3 +1,4 @@
+
 package benutzerschnittstelle;
 
 import java.awt.BorderLayout;
@@ -728,7 +729,9 @@ public final class Spielfeld extends JFrame
 					+ stat.leseAnzahlAufgedecktePlatten()));
 			panel.add(new JLabel("Durschnittliche Denkzeit: "
 					+ stat.leseDurchschnittlicheDenkzeit()));
-			panel.add(new JLabel("Spielzeit: " + stat.leseSpielzeit()));
+			panel.add(new JLabel("Spielzeit: " + (Math.round(stat.leseSpielzeit() / 1000)) + "s"));
+			panel.add(new JLabel(
+					"------------------------------------------------------------"));
 		}
 		final JScrollPane statistikPanel = new JScrollPane(panel);
 		JOptionPane.showMessageDialog(null, statistikPanel);
