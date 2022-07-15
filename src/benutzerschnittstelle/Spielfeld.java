@@ -8,12 +8,10 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -28,6 +26,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -68,6 +67,8 @@ public final class Spielfeld extends JFrame
 	private int vermutungenZurueckgenommen;
 	private double spielzeit;
 	private int anzahlAufgedecktePlatten;
+	private static long timerStart;
+	private static long timerEnde;
 
 	/**
 	 * Launch the application.
@@ -80,9 +81,9 @@ public final class Spielfeld extends JFrame
 			public void run()
 			{
 				fenster.setVisible(true);
+				timerStart = System.currentTimeMillis();
 			}
 		});
-
 	}
 
 	/**
@@ -90,59 +91,13 @@ public final class Spielfeld extends JFrame
 	 */
 	public Spielfeld()
 	{
-		addWindowListener(new WindowListener()
-		{
-
-			@Override
-			public void windowOpened(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e)
-			{
-				final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
-						anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
-						vermutungenZurueckgenommen, spielzeit);
-				Dateisystem.speichereStatistik(statistik);
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e)
-			{
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e)
-			{
-			}
-		});
+		Dateisystem.ladeStatistik();
 		// Spalten und Zeilen festlegen
 		final JPanel inputPanel = new JPanel();
 		final JTextField spaltenFeld = new JTextField("6");
 		final JTextField zeilenFeld = new JTextField("14");
-		spaltenFeld.addFocusListener(new FocusListener()
+		spaltenFeld.addFocusListener(new FocusAdapter()
 		{
-			@Override
-			public void focusLost(FocusEvent e)
-			{
-			}
-
 			@Override
 			public void focusGained(FocusEvent e)
 			{
@@ -150,13 +105,8 @@ public final class Spielfeld extends JFrame
 			}
 		});
 
-		zeilenFeld.addFocusListener(new FocusListener()
+		zeilenFeld.addFocusListener(new FocusAdapter()
 		{
-			@Override
-			public void focusLost(FocusEvent e)
-			{
-			}
-
 			@Override
 			public void focusGained(FocusEvent e)
 			{
@@ -235,13 +185,8 @@ public final class Spielfeld extends JFrame
 			schwierigkeiten.setEditable(false);
 			hundehaufenPanel.add(schwierigkeiten);
 			final JTextField hundehaufenTextFeld = new JTextField("20");
-			hundehaufenTextFeld.addFocusListener(new FocusListener()
+			hundehaufenTextFeld.addFocusListener(new FocusAdapter()
 			{
-				@Override
-				public void focusLost(FocusEvent e)
-				{
-				}
-
 				@Override
 				public void focusGained(FocusEvent e)
 				{
@@ -409,14 +354,8 @@ public final class Spielfeld extends JFrame
 										"Möchten Sie das Spiel wirklich neustarten?");
 						if (optiongewaehlt == JOptionPane.YES_OPTION)
 						{
-							if (fenster != null)
-							{
-								fenster.setVisible(false);
-								fenster.dispose();
-							}
-							fenster = new Spielfeld();
-							fenster.pack();
-							fenster.setVisible(true);
+							speichere();
+							neustarten();
 						}
 					}
 				});
@@ -444,8 +383,7 @@ public final class Spielfeld extends JFrame
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						// TODO: Aktion einfügen
-
+						zeigeStatistiken();
 					}
 				});
 		menu.add(neustartItem);
@@ -494,32 +432,11 @@ public final class Spielfeld extends JFrame
 					button.setIcon(zugedecktIcon);
 				}
 				// MouseListener hinzufuegen
-				button.addMouseListener(new MouseListener()
+				button.addMouseListener(new MouseAdapter()
 				{
 					// Diese Methoden sind irrelevant fuer dieses Programm.
 					// Somit sind sie nicht beschrieben und koennen ignoriert
 					// werden
-
-					@Override
-					public void mouseReleased(MouseEvent e)
-					{
-						mouseClicked(e);
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e)
-					{
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e)
-					{
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e)
-					{
-					}
 
 					@Override
 					public void mouseClicked(MouseEvent mausKlick)
@@ -567,19 +484,16 @@ public final class Spielfeld extends JFrame
 												.showConfirmDialog(null, spiel
 														.verloren() + "\n"
 														+ "Möchten Sie das Spiel neustarten?");
+										final Statistik statistik;
 										switch (optiongewaehlt)
 										{
 											case JOptionPane.YES_OPTION:
-												if (fenster != null)
-												{
-													fenster.setVisible(false);
-													fenster.dispose();
-												}
-												fenster = new Spielfeld();
-												fenster.setVisible(true);
+												speichere();
+												neustarten();
 												break;
 
 											case JOptionPane.NO_OPTION:
+												speichere();
 												System.exit(0);
 												break;
 
@@ -689,8 +603,24 @@ public final class Spielfeld extends JFrame
 	{
 		if (spiel.hatGewonnen())
 		{
-			JOptionPane.showConfirmDialog(null,
+			final int option = JOptionPane.showConfirmDialog(null,
 					"Herzlichen Glückwunsch! \n Möchten Sie nochmal spielen?");
+			switch (option)
+			{
+				case JOptionPane.YES_OPTION:
+				{
+					speichere();
+					neustarten();
+					break;
+
+				}
+				case JOptionPane.NO_OPTION:
+					speichere();
+					System.exit(0);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
@@ -772,5 +702,57 @@ public final class Spielfeld extends JFrame
 		final int anzahl = spalten * zeilen;
 		return "Leicht: " + anzahl / 6 + "\nMittel: " + anzahl / 4.2
 				+ "\nSchwer: " + anzahl / 3.5;
+	}
+
+	/**
+	 * Zeigt eine Liste aller Spielstatistiken an.
+	 */
+	private void zeigeStatistiken()
+	{
+		final JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(Statistik.statistiken.size() * 8, 1));
+		for (int i = 0; i < Statistik.statistiken.size(); i++)
+		{
+			Statistik stat = Statistik.statistiken.get(i);
+
+			panel.add(new JLabel("Gespielt am: " + stat.leseDatum()));
+			panel.add(new JLabel("Anzahl richtige Flaggen: "
+					+ stat.leseAnzahlRichtigeFlaggen()));
+			panel.add(new JLabel("Anzahl falsche Flaggen: "
+					+ stat.leseAnzahlFalscheFlaggen()));
+			panel.add(
+					new JLabel("Flaggen gesamt: " + stat.leseFlaggenGesamt()));
+			panel.add(new JLabel("Zurückgenommene Vermutungen: "
+					+ stat.leseVermutungenZurueckgenommen()));
+			panel.add(new JLabel("Aufgedeckte Platten: "
+					+ stat.leseAnzahlAufgedecktePlatten()));
+			panel.add(new JLabel("Durschnittliche Denkzeit: "
+					+ stat.leseDurchschnittlicheDenkzeit()));
+			panel.add(new JLabel("Spielzeit: " + stat.leseSpielzeit()));
+		}
+		final JScrollPane statistikPanel = new JScrollPane(panel);
+		JOptionPane.showMessageDialog(null, statistikPanel);
+	}
+
+	private void speichere()
+	{
+		timerEnde = System.currentTimeMillis();
+		spielzeit = timerEnde - timerStart;
+		final Statistik statistik = new Statistik(anzahlRichtigeFlaggen,
+				anzahlFalscheFlaggen, anzahlAufgedecktePlatten,
+				vermutungenZurueckgenommen, spielzeit);
+		Statistik.statistiken.add(statistik);
+		Dateisystem.speichereStatistik();
+	}
+
+	private void neustarten()
+	{
+		if (fenster != null)
+		{
+			fenster.setVisible(false);
+			fenster.dispose();
+		}
+		fenster = new Spielfeld();
+		fenster.setVisible(true);
 	}
 }
