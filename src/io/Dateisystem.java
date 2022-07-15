@@ -32,7 +32,6 @@ public final class Dateisystem
 		{
 			try
 			{
-
 				file.createNewFile();
 			}
 			catch (Exception e)
@@ -47,19 +46,6 @@ public final class Dateisystem
 					outputStream);
 
 			objectStream.writeObject(Statistik.statistiken);
-			
-			// for (Statistik statistik : Statistik.statistiken)
-			// {
-			// objectStream.writeObject(statistik.leseAnzahlRichtigeFlaggen());
-			// objectStream.writeObject(statistik.leseAnzahlFalscheFlaggen());
-			// objectStream
-			// .writeObject(statistik.leseAnzahlAufgedecktePlatten());
-			// objectStream.writeObject(
-			// statistik.leseVermutungenZurueckgenommen());
-			// objectStream.writeObject(statistik.leseSpielzeit());
-			//
-			//
-			// }
 			objectStream.close();
 		}
 		catch (Exception e)
@@ -80,18 +66,8 @@ public final class Dateisystem
 				FileInputStream inputStream = new FileInputStream(file);
 				ObjectInputStream objectStream = new ObjectInputStream(
 						inputStream);
-
 				Statistik.statistiken = (ArrayList<Statistik>) objectStream
 						.readObject();
-
-				// while (objectStream.available() > 0)
-				// {
-				// statistik = new Statistik(objectStream.readInt(),
-				// objectStream.readInt(), objectStream.readInt(),
-				// objectStream.readInt(), objectStream.readDouble());
-				// Statistik.statistiken.add(statistik);
-				// }
-
 				objectStream.close();
 			}
 			catch (Exception e)
