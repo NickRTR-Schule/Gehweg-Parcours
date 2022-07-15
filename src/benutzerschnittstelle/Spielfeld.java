@@ -261,13 +261,13 @@ public final class Spielfeld extends JFrame
 
 		// Minimale Groeße setzen
 		// Das Fenster kann nicht kleiner als diese Groeße sein.
-		setMinimumSize(new Dimension((spalten * 40 + 205), (zeilen * 40 + 70)));
+		setMinimumSize(new Dimension((spalten * 41 + 205), (zeilen * 41 + 70)));
 		setPreferredSize(getMinimumSize());
 
 		spielanleitungHinzufuegen(contentPane);
 
 		// Standard Groeße festlegen
-		panel.setPreferredSize(new Dimension((spalten * 40), (zeilen * 40)));
+		panel.setPreferredSize(new Dimension((spalten * 41), (zeilen * 41)));
 
 		// Border / Rand festlegen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -422,7 +422,7 @@ public final class Spielfeld extends JFrame
 
 				// Knopf erstellen
 				final JButton button = platte.leseButton();
-				button.setPreferredSize(new Dimension(20, 20));
+				button.setPreferredSize(new Dimension(30, 30));
 				button.setBackground(Color.white);
 
 				// Icon festlegen
