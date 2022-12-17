@@ -96,7 +96,7 @@ public final class Spielfeld extends JFrame
 		// Spalten und Zeilen festlegen
 		final JPanel inputPanel = new JPanel();
 		final JTextField spaltenFeld = new JTextField("6");
-		final JTextField zeilenFeld = new JTextField("14");
+		final JTextField zeilenFeld = new JTextField("1" + "4");
 		spaltenFeld.addFocusListener(new FocusAdapter()
 		{
 			@Override
