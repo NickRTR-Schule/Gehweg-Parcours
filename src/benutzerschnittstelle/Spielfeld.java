@@ -1,42 +1,25 @@
 
 package benutzerschnittstelle;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
-import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import fachkonzept.Platte;
 import fachkonzept.Spiel;
 import fachkonzept.Statistik;
 import io.Dateisystem;
+import fachkonzept.Timer;
 
 /**
  * GUI Klasse des Programms Gehweg-Parcours
@@ -70,6 +53,10 @@ public final class Spielfeld extends JFrame
 	private int anzahlAufgedecktePlatten;
 	private static long timerStart;
 	private static long timerEnde;
+
+	private Timer timer;
+
+	private JLabel timerLabel;
 
 	/**
 	 * Launch the application.
@@ -231,12 +218,12 @@ public final class Spielfeld extends JFrame
 
 		spiel = new Spiel(anzahlHundehaufen, spalten, zeilen);
 		restlicheVermutungen = anzahlHundehaufen;
+		objekteHinzufuegen();
 
 		// Initialisieren
 		initialisieren();
 
 		// Objekte zu dem Fenster hinzuzufuegen
-		objekteHinzufuegen();
 	}
 
 	/**
@@ -271,6 +258,11 @@ public final class Spielfeld extends JFrame
 
 		// Border / Rand festlegen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		timer = new Timer();
+		timerLabel = new JLabel();
+		timer.setComponent(timerLabel);
+		timer.startTimer();
+		contentPane.add(timerLabel);
 
 		// Inhalts panel festlegen
 		setContentPane(contentPane);
@@ -307,7 +299,7 @@ public final class Spielfeld extends JFrame
 		vermutungsLabel.setPreferredSize(new Dimension(150, 50));
 
 		zwischenPanel.add(vermutungsLabel, BorderLayout.NORTH);
-
+		zwischenPanel.add(timerLabel, BorderLayout.NORTH);
 		if (getPreferredSize().height < 470)
 		{
 			// Nichts tun
@@ -711,7 +703,8 @@ public final class Spielfeld extends JFrame
 	private void zeigeStatistiken()
 	{
 		final JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(Statistik.statistiken.size() * 8, 1));
+		//panel.setLayout(new GridLayout(Statistik.statistiken.size() * 8, 1));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		for (int i = 0; i < Statistik.statistiken.size(); i++)
 		{
 			Statistik stat = Statistik.statistiken.get(i);
@@ -730,8 +723,8 @@ public final class Spielfeld extends JFrame
 			panel.add(new JLabel("Durschnittliche Denkzeit: "
 					+ stat.leseDurchschnittlicheDenkzeit()));
 			panel.add(new JLabel("Spielzeit: " + (Math.round(stat.leseSpielzeit() / 1000)) + "s"));
-			panel.add(new JLabel(
-					"------------------------------------------------------------"));
+			panel.add(new JSeparator());
+			panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		}
 		final JScrollPane statistikPanel = new JScrollPane(panel);
 		JOptionPane.showMessageDialog(null, statistikPanel);

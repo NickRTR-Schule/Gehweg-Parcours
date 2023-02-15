@@ -40,7 +40,7 @@ public final class Statistik implements Serializable
 		this.spielzeit = spielzeit;
 		flaggenGesamt = anzahlRichtigeFlaggen + anzahlFalscheFlaggen
 				+ vermutungenZurueckgenommen;
-		durchschnittlicheDenkzeit = spielzeit / flaggenGesamt;
+		durchschnittlicheDenkzeit = spielzeit / flaggenGesamt + vermutungenZurueckgenommen + anzahlAufgedecktePlatten;
 		datum = new Date();
 	}
 
