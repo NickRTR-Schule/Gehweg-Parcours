@@ -57,6 +57,7 @@ public final class Dateisystem
 	/**
 	 * Lädt die Statistik vom Dateisystem.
 	 */
+	@SuppressWarnings("unchecked")
 	static public void ladeStatistik()
 	{
 		if (file.exists())

@@ -3,7 +3,6 @@ package fachkonzept;
 import fachkonzept.Timer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Objects;
 
 /**

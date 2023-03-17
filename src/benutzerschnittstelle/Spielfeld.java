@@ -7,7 +7,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -477,7 +476,6 @@ public final class Spielfeld extends JFrame
 												.showConfirmDialog(null, spiel
 														.verloren() + "\n"
 														+ "Möchten Sie das Spiel neustarten?");
-										final Statistik statistik;
 										switch (optiongewaehlt)
 										{
 											case JOptionPane.YES_OPTION:
